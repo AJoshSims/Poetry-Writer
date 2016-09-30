@@ -112,11 +112,35 @@ function readFile()
             }
 
             previousWord = currentWord;
-        });
+        }
+    );
 
-        var lastWord = previousWord;
+    var lastWord = previousWord;
+
+    if (condWordCount[lastWord][firstWord] == undefined)
+    {
+        condWordCount[lastWord][firstWord] = 1;
+    }
+
+    else
+    {
         condWordCount[lastWord][firstWord] =
             condWordCount[lastWord][firstWord] + 1;
+    }
+
+    // TODO remove
+    console.log(firstWord + " occurs " +
+        condWordCount[lastWord][firstWord] + " times after " +
+        lastWord);
+
+    for (var word in wordCount)
+    {
+        wordFreq[word] = wordCount[word] / words;
+
+        //TODO remove
+        console.log("There is a " + wordFreq[word] + " chance of " +
+            "encountering " + word);
+    }
 }
 
 readFile();
