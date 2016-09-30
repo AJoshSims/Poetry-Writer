@@ -63,7 +63,7 @@ function readFile()
     var previousWord = null;
 
     //
-    fileInContent.trim().split(/\s/).forEach(
+    fileInContent.trim().split(/\s+/).forEach(
         function(currentWord)
         {
             //TODO remove
@@ -74,6 +74,8 @@ function readFile()
             if (wordCount[currentWord] == undefined)
             {
                 wordCount[currentWord] = 1;
+
+                condWordCount[currentWord] = {};
             }
 
             else
@@ -92,20 +94,34 @@ function readFile()
 
             else
             {
-                // condWordCount[previousWord][currentWord] =
-                //     condWordCount[previousWord][currentWord] + 1;
+                if (condWordCount[previousWord][currentWord] == undefined)
+                {
+                    condWordCount[previousWord][currentWord] = 1;
+                }
+
+                else
+                {
+                    condWordCount[previousWord][currentWord] =
+                        condWordCount[previousWord][currentWord] + 1;
+                }
+
+                // TODO remove
+                console.log(currentWord + " occurs " +
+                    condWordCount[previousWord][currentWord] + " times after " +
+                    previousWord);
             }
 
             previousWord = currentWord;
         });
 
-        // var lastWord = previousWord;
-        // condWordCount[lastWord][firstWord] =
-        //     condWordCount[lastWord][firstWord] + 1;
+        var lastWord = previousWord;
+        condWordCount[lastWord][firstWord] =
+            condWordCount[lastWord][firstWord] + 1;
 }
 
 readFile();
 
+//TODO remove
 console.log("The number of words in that file is " + words + ".");
 
 
