@@ -62,6 +62,15 @@ function readFile()
     //
     var previousWord = null;
 
+    var fileInContentArray = fileInContent.trim().split(/\s+/);
+
+    if (fileInContentArray.length == 1
+        && fileInContentArray[fileInContentArray.length - 1] == "")
+    {
+        console.log("Input can not be empty or only be whitespace.");
+        process.exit(1);
+    }
+
     //
     fileInContent.trim().split(/\s+/).forEach(
         function(currentWord)
@@ -116,6 +125,7 @@ function readFile()
     );
 
     var lastWord = previousWord;
+    previousWord = null;
 
     if (condWordCount[lastWord][firstWord] == undefined)
     {
@@ -133,13 +143,32 @@ function readFile()
         condWordCount[lastWord][firstWord] + " times after " +
         lastWord);
 
+    condWordFreq[lastWord] =
+        {firstWord : condWordCount[lastWord][firstWord] / words};
+
     for (var word in wordCount)
     {
-        wordFreq[word] = wordCount[word] / words;
+            wordFreq[word] = wordCount[word] / words;
+
+            condWordFreq[word] = {};
 
         //TODO remove
         console.log("There is a " + wordFreq[word] + " chance of " +
             "encountering " + word);
+    }
+
+    for (var wordBefore in condWordCount)
+    {
+        for (var wordAfter in condWordCount[wordBefore])
+        {
+            condWordFreq[wordBefore][wordAfter] =
+                condWordCount[wordBefore][wordAfter] / words;
+
+            //TODO remove
+            console.log("There is a " + condWordFreq[wordBefore][wordAfter] +
+                " chance of " + "encountering " + wordAfter + " after " +
+                wordBefore);
+        }
     }
 }
 
