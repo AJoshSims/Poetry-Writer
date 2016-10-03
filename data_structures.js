@@ -55,8 +55,10 @@ function readInputFile(inputFileName)
         if (error.code == "ENOENT")
         {
             console.log("The specified input file does not exist or is not " +
-                "readable.");
-            process.exit(1);
+                "readable.\nAborting program...");
+
+            const CANNOT_READ_SPECIFIED_INPUT_FILE = 1;
+            process.exit(CANNOT_READ_SPECIFIED_INPUT_FILE);
         }
         else
         {
@@ -77,15 +79,15 @@ function readInputFile(inputFileName)
  */
 function parseInputFile(inputFileContent)
 {
-    console.log("Parsing data...");
     // Parses the contents of the specified input file such that all whitespace
     // is skipped.
     var inputFileWords = inputFileContent.trim().split(/\s+/);
 
     // Aborts the program if the specified input file is either empty or
     // composed only of whitespace.
+    var onlyWord = inputFileWords.length - 1;
     if (inputFileWords.length == 1
-        && inputFileWords[inputFileWords.length - 1] == "")
+        && inputFileWords[onlyWord] == "")
     {
         console.log("Input can not be empty or only be whitespace.");
         process.exit(1);
@@ -127,20 +129,21 @@ function wordCountFunc(currentWord)
  */
 function condWordCountFunc(previousWord, currentWord)
 {
-    // If current word has, until now, not been encountered after the previous
-    // word, establish its relationship to the previous word in the
-    // presentation data.
-    if (condWordCount[previousWord][currentWord] == undefined)
+    if (previousWord != null)
     {
-        condWordCount[previousWord][currentWord] = 1;
-    }
+        // If current word has, until now, not been encountered after the previous
+        // word, establish its relationship to the previous word in the
+        // presentation data.
+        if (condWordCount[previousWord][currentWord] == undefined) {
+            condWordCount[previousWord][currentWord] = 1;
+        }
 
-    // Otherwise, just increment the number of times that the current word has
-    // appeared after the previous word.
-    else
-    {
-        condWordCount[previousWord][currentWord] =
-            condWordCount[previousWord][currentWord] + 1;
+        // Otherwise, just increment the number of times that the current word has
+        // appeared after the previous word.
+        else {
+            condWordCount[previousWord][currentWord] =
+                condWordCount[previousWord][currentWord] + 1;
+        }
     }
 }
 
@@ -167,15 +170,7 @@ function calculateWordCounts(inputFileWords)
         {
             wordCountFunc(currentWord);
 
-            if (previousWord == null)
-            {
-                firstWord = currentWord;
-            }
-
-            else
-            {
-                condWordCountFunc(previousWord, currentWord);
-            }
+            condWordCountFunc(previousWord, currentWord);
 
             previousWord = currentWord;
         }
@@ -184,8 +179,10 @@ function calculateWordCounts(inputFileWords)
     // The word after the last word is the first word of the input file.
     // Thereby calculates how many times the word appearing first in the input
     // file has appeared after the word appearing last in the input file.
-    var lastWord = previousWord;
-    condWordCountFunc(firstWord, lastWord);
+    var lastWord = inputFileWords.length - 1;
+    var firstWord = 0;
+    condWordCountFunc(inputFileWords[lastWord],
+        inputFileWords[firstWord]);
 
     return inputFileWords.length;
 }
@@ -216,7 +213,8 @@ function condWordFreqFunc(words)
         for (var wordAfter in condWordCount[wordBefore])
         {
             condWordFreq[wordBefore][wordAfter] =
-                condWordCount[wordBefore][wordAfter] / words;
+                condWordCount[wordBefore][wordAfter]
+                / Object.keys(condWordCount[wordBefore]).length;
         }
     }
 }
