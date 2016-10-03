@@ -231,7 +231,10 @@ function calculateWordFrequencies(words)
  */
 function printWordCountsAndWordFrequencies()
 {
-
+    console.log("wordCount is " + JSON.stringify(wordCount, null, "  "));
+    console.log("wordFreq is " + JSON.stringify(wordFreq, null, "  "));
+    console.log("condWordCount is " + JSON.stringify(condWordCount, null, "  "));
+    console.log("condWordFreq is " + JSON.stringify(condWordFreq, null, "  "));
 }
 
 function main(inputFileName)
