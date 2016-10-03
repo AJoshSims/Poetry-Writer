@@ -1,4 +1,16 @@
 /**
+ * Parses the words of a specified text file such that the number of
+ * occurrences of a word and the likelihood of a word's occurrence, as
+ * well as the occurrences and likelihood of each word which appears directly
+ * after that word, are calculated and printed to the console.
+ *
+ * <p>Usage: node data_structures.js <input_text_file>
+ *
+ * @author Joshua Sims
+ * @version 03 October 2016
+ */
+
+/**
  * Enables file I/O operations.
  */
 var fs = require("fs");
