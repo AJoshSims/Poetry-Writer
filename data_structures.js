@@ -1,4 +1,6 @@
-// Enables file I/O operations
+/**
+ * Enables file I/O operations.
+ */
 var fs = require("fs");
 
 /**
@@ -9,30 +11,48 @@ var inputFileName = process.argv[2];
 /**
  * Describes how many times each word appears in the input file.
  */
-var wordCount = {};
+var wordCountContainer = {};
 
 /**
  * Describes the likelihood of each word in the input file to appear in the
  * input file.
  */
-var wordFreq = {};
+var wordFreqContainer = {};
 
 /**
  * Describes which words immediately follow which words and how many times they
  * do so.
  */
-var condWordCount = {};
+var condWordCountContainer = {};
 
 /**
  * Describes which words immediately follow which words and how likely they are
  * to do so.
  */
-var condWordFreq = {};
+var condWordFreqContainer = {};
 
-// Parses the specified input file and then calculates and stores data in
-// wordCount, wordFreq, condWordCount, and condWordFreq before printing that
-// data to the console.
+// Parses the words of a specified text file such that the number of
+// occurrences of a word and the likelihood of a word's occurrence, as
+// well as the occurrences and likelihood of each word which appears directly
+// after that word, are calculated and printed to the console.
 main(inputFileName);
+
+/**
+ * Determines whether or not the appropriate number of arguments was passed
+ * and aborts the program if too many or too few arguments were passed.
+ */
+function determineIfArgsAreAcceptable()
+{
+    const ACCEPTABLE_NUM_OF_ARGS = 3;
+    if (process.argv.length != ACCEPTABLE_NUM_OF_ARGS)
+    {
+        const UNACCEPTABLE_NUM_OF_ARGS = 1;
+        console.log("You have specified an incorrect number of arguments." +
+            "\nUsage: node data_structures.js <input_file_name>" +
+            "\nAborting program...");
+        process.exit(UNACCEPTABLE_NUM_OF_ARGS);
+    }
+}
 
 /**
  * Reads and temporarily stores the contents the specified input file so that
@@ -50,6 +70,8 @@ function readInputFile(inputFileName)
         // storing its contents, as a string, into inputFileContent.
         var inputFileContent = fs.readFileSync(inputFileName, "utf8");
     }
+
+    // If the specified file could not be read...
     catch(error)
     {
         if (error.code == "ENOENT")
@@ -62,6 +84,7 @@ function readInputFile(inputFileName)
         }
         else
         {
+            //Unknown error. This should never execute.
             throw error;
         }
     }
@@ -98,25 +121,26 @@ function parseInputFile(inputFileContent)
 
 /**
  * Determines how many times each word in the input file appears in the input
- * file.
+ * file as well as how many times each word appears after the word(s) which
+ * precede it.
  *
  * @param currentWord - the word currently being examined
  */
-function wordCountFunc(currentWord)
+function wordCount(currentWord)
 {
     // If this word has not been encountered before, establish its existence in
     // the presentation data.
-    if (wordCount[currentWord] == undefined)
+    if (wordCountContainer[currentWord] == undefined)
     {
-        wordCount[currentWord] = 1;
-        condWordCount[currentWord] = {};
-        condWordFreq[currentWord] = {};
+        wordCountContainer[currentWord] = 1;
+        condWordCountContainer[currentWord] = {};
+        condWordFreqContainer[currentWord] = {};
     }
     // Otherwise, just increment the number of times that this word has
     // appeared.
     else
     {
-        wordCount[currentWord] = wordCount[currentWord] + 1;
+        wordCountContainer[currentWord] = wordCountContainer[currentWord] + 1;
     }
 }
 
@@ -127,22 +151,21 @@ function wordCountFunc(currentWord)
  * @param previousWord - the word previously examined.
  * @param currentWord - the word currently being examined.
  */
-function condWordCountFunc(previousWord, currentWord)
+function condWordCount(previousWord, currentWord)
 {
     if (previousWord != null)
     {
-        // If current word has, until now, not been encountered after the previous
-        // word, establish its relationship to the previous word in the
-        // presentation data.
-        if (condWordCount[previousWord][currentWord] == undefined) {
-            condWordCount[previousWord][currentWord] = 1;
+        // If current word has, until now, not been encountered after the
+        // previous word, establishes its relationship to the previous word.
+        if (condWordCountContainer[previousWord][currentWord] == undefined) {
+            condWordCountContainer[previousWord][currentWord] = 1;
         }
 
-        // Otherwise, just increment the number of times that the current word has
-        // appeared after the previous word.
+        // Otherwise, just increment the number of times that the current word
+        // has appeared after the previous word.
         else {
-            condWordCount[previousWord][currentWord] =
-                condWordCount[previousWord][currentWord] + 1;
+            condWordCountContainer[previousWord][currentWord] =
+                condWordCountContainer[previousWord][currentWord] + 1;
         }
     }
 }
@@ -168,20 +191,21 @@ function calculateWordCounts(inputFileWords)
     inputFileWords.forEach(
         function(currentWord)
         {
-            wordCountFunc(currentWord);
+            wordCount(currentWord);
 
-            condWordCountFunc(previousWord, currentWord);
+            condWordCount(previousWord, currentWord);
 
             previousWord = currentWord;
         }
     );
 
     // The word after the last word is the first word of the input file.
-    // Thereby calculates how many times the word appearing first in the input
-    // file has appeared after the word appearing last in the input file.
+    // Thus, this code calculates how many times the word appearing first in
+    // the input file has appeared after the word appearing last in the input
+    // file.
     var lastWord = inputFileWords.length - 1;
     var firstWord = 0;
-    condWordCountFunc(inputFileWords[lastWord],
+    condWordCount(inputFileWords[lastWord],
         inputFileWords[firstWord]);
 
     return inputFileWords.length;
@@ -191,13 +215,13 @@ function calculateWordCounts(inputFileWords)
  * Determines the likelihood of each word to appear in the input file based
  * on the number of its actual appearance(s) in the input file.
  *
- * @param words - the number of words in the input file
+ * @param numOfWords - the number of words in the input file
  */
-function wordFreqFunc(words)
+function wordFreq(numOfWords)
 {
-    for (var word in wordCount)
+    for (var word in wordCountContainer)
     {
-        wordFreq[word] = wordCount[word] / words;
+        wordFreqContainer[word] = wordCountContainer[word] / numOfWords;
     }
 }
 
@@ -206,15 +230,15 @@ function wordFreqFunc(words)
  * directly follows based on the number of its actual appearances after those
  * words.
  */
-function condWordFreqFunc(words)
+function condWordFreq()
 {
-    for (var wordBefore in condWordCount)
+    for (var wordBefore in condWordCountContainer)
     {
-        for (var wordAfter in condWordCount[wordBefore])
+        for (var wordAfter in condWordCountContainer[wordBefore])
         {
-            condWordFreq[wordBefore][wordAfter] =
-                condWordCount[wordBefore][wordAfter]
-                / Object.keys(condWordCount[wordBefore]).length;
+            condWordFreqContainer[wordBefore][wordAfter] =
+                condWordCountContainer[wordBefore][wordAfter]
+                / Object.keys(condWordCountContainer[wordBefore]).length;
         }
     }
 }
@@ -225,11 +249,11 @@ function condWordFreqFunc(words)
  * the likelihood of each word to appear after the words it directly follows
  * based on the number of its actual appearances after those words.
  */
-function calculateWordFrequencies(words)
+function calculateWordFrequencies()
 {
-    wordFreqFunc(words);
+    wordFreq();
 
-    condWordFreqFunc(words);
+    condWordFreq();
 }
 
 /**
@@ -238,25 +262,31 @@ function calculateWordFrequencies(words)
  */
 function printWordCountsAndWordFrequencies()
 {
-    console.log("wordCount is " + JSON.stringify(wordCount, null, "  "));
-    console.log("wordFreq is " + JSON.stringify(wordFreq, null, "  "));
-    console.log("condWordCount is " + JSON.stringify(condWordCount, null, "  "));
-    console.log("condWordFreq is " + JSON.stringify(condWordFreq, null, "  "));
+    console.log("wordCount is " +
+        JSON.stringify(wordCountContainer, null, "  "));
+    console.log("wordFreq is " +
+        JSON.stringify(wordFreqContainer, null, "  "));
+    console.log("condWordCount is " +
+        JSON.stringify(condWordCountContainer, null, "  "));
+    console.log("condWordFreq is " +
+        JSON.stringify(condWordFreqContainer, null, "  "));
 }
 
 /**
- * Parses the specified input file and then calculates and stores data in
- * wordCount, wordFreq, condWordCount, and condWordFreq before printing that
- * data to the console.
+ * Parses the words of a specified text file such that the number of
+ * occurrences of a word and the likelihood of a word's occurrence, as
+ * well as the occurrences and likelihood of each word which appears directly
+ * after that word, are calculated and printed to the console.
  *
  * @param inputFileName - the name of the file to be parsed
  */
 function main(inputFileName)
 {
+    determineIfArgsAreAcceptable();
+
     var inputFileWords = parseInputFile(readInputFile(inputFileName));
 
     calculateWordFrequencies(calculateWordCounts(inputFileWords));
 
     printWordCountsAndWordFrequencies();
 }
-
