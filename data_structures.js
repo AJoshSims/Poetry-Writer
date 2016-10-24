@@ -16,10 +16,8 @@
 var exports = module.exports = {};
 
 // exported functions
-exports.wordCount = wordCount;
-exports.wordFreq = wordFreq;
-exports.condWordCount = condWordCount;
-exports.condWordFreq = condWordFreq;
+exports.getDataStructures = getDataStructures;
+exports.displayDataStructures = displayDataStructures;
 
 /**
  * Enables file I/O operations.
@@ -27,9 +25,14 @@ exports.condWordFreq = condWordFreq;
 var fs = require("fs");
 
 /**
- * The name of the file that contains the words to be examined.
+ *
  */
-var inputFileName = process.argv[2];
+const CANNOT_READ_SPECIFIED_INPUT_FILE = 1;
+
+/**
+ *
+ */
+const INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE = 2;
 
 /**
  * Describes how many times each word appears in the input file.
@@ -53,29 +56,6 @@ var condWordCountContainer = {};
  * to do so.
  */
 var condWordFreqContainer = {};
-
-// Parses the words of a specified text file such that the number of
-// occurrences of a word and the likelihood of a word's occurrence, as
-// well as the occurrences and likelihood of each word which appears directly
-// after that word, are calculated and printed to the console.
-main(inputFileName);
-
-/**
- * Determines whether or not the appropriate number of arguments was passed
- * and aborts the program if too many or too few arguments were passed.
- */
-function determineIfArgsAreAcceptable()
-{
-    const ACCEPTABLE_NUM_OF_ARGS = 3;
-    if (process.argv.length != ACCEPTABLE_NUM_OF_ARGS)
-    {
-        const UNACCEPTABLE_NUM_OF_ARGS = 1;
-        console.log("You have specified an incorrect number of arguments." +
-            "\nUsage: node data_structures.js <input_file_name>" +
-            "\nAborting program...");
-        process.exit(UNACCEPTABLE_NUM_OF_ARGS);
-    }
-}
 
 /**
  * Reads and temporarily stores the contents the specified input file so that
@@ -102,7 +82,6 @@ function readInputFile(inputFileName)
             console.log("The specified input file does not exist or is not " +
                 "readable.\nAborting program...");
 
-            const CANNOT_READ_SPECIFIED_INPUT_FILE = 1;
             process.exit(CANNOT_READ_SPECIFIED_INPUT_FILE);
         }
         else
@@ -136,7 +115,8 @@ function parseInputFile(inputFileContent)
         && inputFileWords[onlyWord] == "")
     {
         console.log("Input can not be empty or only be whitespace.");
-        process.exit(1);
+
+        process.exit(INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE);
     }
 
     return inputFileWords;
@@ -289,10 +269,35 @@ function calculateWordFrequencies(numOfWords)
 }
 
 /**
+ * Parses the words of a specified text file such that the number of
+ * occurrences of a word and the likelihood of a word's occurrence, as
+ * well as the occurrences and likelihood of each word which appears directly
+ * after that word, are returned via an array of data structures.
+ *
+ * @param inputFileName - the name of the file to be parsed
+ *
+ * @return dataStructures - the counts and likelihoods of the words in the
+ *     input file.
+ */
+function getDataStructures(inputFileName)
+{
+    var inputFileWords = parseInputFile(readInputFile(inputFileName));
+
+    calculateWordFrequencies(calculateWordCounts(inputFileWords));
+
+    var dataStructures =
+        {"wordCount" : wordCountContainer,
+        "wordFreq" : wordFreqContainer,
+        "condWordCount" : condWordCountContainer,
+        "condWordFreq" : condWordFreqContainer};
+    return dataStructures;
+}
+
+/**
  * Prints to the console the information gathered about the words in the
  * specified input file.
  */
-function printWordCountsAndWordFrequencies()
+function displayDataStructures()
 {
     console.log("wordCount is " +
         JSON.stringify(wordCountContainer, null, "  "));
@@ -302,23 +307,4 @@ function printWordCountsAndWordFrequencies()
         JSON.stringify(condWordCountContainer, null, "  "));
     console.log("condWordFreq is " +
         JSON.stringify(condWordFreqContainer, null, "  "));
-}
-
-/**
- * Parses the words of a specified text file such that the number of
- * occurrences of a word and the likelihood of a word's occurrence, as
- * well as the occurrences and likelihood of each word which appears directly
- * after that word, are calculated and printed to the console.
- *
- * @param inputFileName - the name of the file to be parsed
- */
-function main(inputFileName)
-{
-    determineIfArgsAreAcceptable();
-
-    var inputFileWords = parseInputFile(readInputFile(inputFileName));
-
-    calculateWordFrequencies(calculateWordCounts(inputFileWords));
-
-    printWordCountsAndWordFrequencies();
 }
