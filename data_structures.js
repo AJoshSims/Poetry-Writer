@@ -243,12 +243,14 @@ function condWordFreq()
             sumOfEveryOccurrenceOfEachWordAfter +=
                 condWordCountContainer[wordBefore][wordAfter]
         }
+
         for (var wordAfter in condWordCountContainer[wordBefore])
         {
             condWordFreqContainer[wordBefore][wordAfter] =
                 condWordCountContainer[wordBefore][wordAfter]
                 / sumOfEveryOccurrenceOfEachWordAfter;
         }
+
         sumOfEveryOccurrenceOfEachWordAfter = 0;
     }
 }
@@ -297,14 +299,14 @@ function getDataStructures(inputFileName)
  * Prints to the console the information gathered about the words in the
  * specified input file.
  */
-function displayDataStructures()
+function displayDataStructures(dataStructures)
 {
     console.log("wordCount is " +
-        JSON.stringify(wordCountContainer, null, "  "));
+        JSON.stringify(dataStructures["wordCount"], null, "  "));
     console.log("wordFreq is " +
-        JSON.stringify(wordFreqContainer, null, "  "));
+        JSON.stringify(dataStructures["wordFreq"], null, "  "));
     console.log("condWordCount is " +
-        JSON.stringify(condWordCountContainer, null, "  "));
+        JSON.stringify(dataStructures["condWordCount"], null, "  "));
     console.log("condWordFreq is " +
-        JSON.stringify(condWordFreqContainer, null, "  "));
+        JSON.stringify(dataStructures["condWordFreq"], null, "  "));
 }
