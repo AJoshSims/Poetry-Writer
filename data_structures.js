@@ -4,11 +4,22 @@
  * well as the occurrences and likelihood of each word which appears directly
  * after that word, are calculated and printed to the console.
  *
- * <p>Usage: node data_structures.js <input_text_file>
+ * <p>Usage: node data_structures.js &lt;input_text_file&gt;
  *
  * @author Joshua Sims
  * @version 03 October 2016
  */
+
+/**
+ * Enables the exportation of this file's functions.
+ */
+var exports = module.exports = {};
+
+// exported functions
+exports.wordCount = wordCount;
+exports.wordFreq = wordFreq;
+exports.condWordCount = condWordCount;
+exports.condWordFreq = condWordFreq;
 
 /**
  * Enables file I/O operations.
@@ -244,14 +255,21 @@ function wordFreq(numOfWords)
  */
 function condWordFreq()
 {
+    var sumOfEveryOccurrenceOfEachWordAfter = 0;
     for (var wordBefore in condWordCountContainer)
     {
         for (var wordAfter in condWordCountContainer[wordBefore])
         {
+            sumOfEveryOccurrenceOfEachWordAfter +=
+                condWordCountContainer[wordBefore][wordAfter]
+        }
+        for (var wordAfter in condWordCountContainer[wordBefore])
+        {
             condWordFreqContainer[wordBefore][wordAfter] =
                 condWordCountContainer[wordBefore][wordAfter]
-                / Object.keys(condWordCountContainer[wordBefore]).length;
+                / sumOfEveryOccurrenceOfEachWordAfter;
         }
+        sumOfEveryOccurrenceOfEachWordAfter = 0;
     }
 }
 
@@ -260,10 +278,12 @@ function condWordFreq()
  * on the number of its actual appearance(s) in the input file. Also determines
  * the likelihood of each word to appear after the words it directly follows
  * based on the number of its actual appearances after those words.
+ *
+ * @param numOfWords - the number of words in the input file
  */
-function calculateWordFrequencies()
+function calculateWordFrequencies(numOfWords)
 {
-    wordFreq();
+    wordFreq(numOfWords);
 
     condWordFreq();
 }
