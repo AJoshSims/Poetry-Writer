@@ -60,7 +60,6 @@ function sortWordFreqContainer(wordFreqContainer)
  */
 function sortCondWordFreqContainer(condWordFreqContainer)
 {
-	console.log(condWordFreqContainer);
 	var sortedCondWordFreqContainer = {};
 
 	for (var wordBefore in condWordFreqContainer)
@@ -75,7 +74,6 @@ function sortCondWordFreqContainer(condWordFreqContainer)
 			});
 	}
 
-	console.log(sortedCondWordFreqContainer);
 	return sortedCondWordFreqContainer;
 }
 
@@ -162,6 +160,7 @@ function makePoem(
 
 				poem += nextWord + " ";
 
+				previousWord = nextWord;
 				++indexOfProbabilityOfCurrentWord;
 			}
 			inclusionOfFirstWord = 0;
@@ -198,7 +197,7 @@ function main(
 		probabilitiesForWordToBeWritten,
 		wordFreqContainer, condWordFreqContainer);
 
-	console.log(poem);
+	process.stdout.write(poem);
 
 	if (displayDataStructures)
 	{
