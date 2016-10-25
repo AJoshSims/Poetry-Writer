@@ -1,12 +1,3 @@
-/*
- * build a string separated by single spaces
- * 1. determine and concatenate "first_word "
- * 2. then determine and concatenate each "next_word " (or "next_word" in case of last) until we've reached the end of the line (according to count)
- * 3. insert new line char
- *  [if we have have reached the end of the stanza] insert new line char
- *  [if we have reached end of poem] terminate
- *  [otherwise] return to step 1
- */
 
 // TODO remove single space from end of lines?
 
@@ -22,6 +13,16 @@ var dataStructuresFile = require("./data_structures.js");
  *
  */
 const INDEX_OF_PROBABILITY_OF_FIRST_WORD = 0;
+
+/**
+ *
+ */
+const ONE_WORD = 1;
+
+/**
+ *
+ */
+const ONE_WORD_LEFT = 1;
 
 // Modify this line to specify the arguments which govern the production of
 // the poem.
@@ -130,7 +131,13 @@ function makePoem(
 	var firstWord = pickFirstWord(
 		probabilitiesForWordsToBeWritten[indexOfProbabilityOfCurrentWord],
 		wordFreqContainer);
-	poem += firstWord + " ";
+
+	poem += firstWord;
+
+	if (Object.keys(wordFreqContainer).length > ONE_WORD)
+	{
+		poem += " ";
+	}
 
 	++indexOfProbabilityOfCurrentWord;
 	var inclusionOfFirstWord = 1;
@@ -158,7 +165,12 @@ function makePoem(
 					indexOfProbabilityOfCurrentWord],
 					condWordFreqContainer, previousWord);
 
-				poem += nextWord + " ";
+				poem += nextWord;
+
+				if (numOfWordsPerLineToCreate != ONE_WORD_LEFT)
+				{
+					poem += " ";
+				}
 
 				previousWord = nextWord;
 				++indexOfProbabilityOfCurrentWord;
