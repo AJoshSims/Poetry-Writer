@@ -25,7 +25,7 @@ const INDEX_OF_PROBABILITY_OF_FIRST_WORD = 0;
 
 // Modify this line to specify the arguments which govern the production of
 // the poem.
-main('rbbrrg_input_text.txt', 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], false);
+main('rbbrrg_input_text.txt', 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], true);
 
 // /**
 //  * TODO
@@ -42,48 +42,49 @@ main('rbbrrg_input_text.txt', 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], false);
 /**
  *
  */
-function sortWordFreq(wordFreq)
+function sortWordFreqContainer(wordFreqContainer)
 {
-	var sortedWordFreq = {};
+	var sortedWordFreqContainer = {};
 
-	Object.keys(wordFreq).sort().forEach(
+	var keys = Object.keys(wordFreqContainer).sort().forEach(
 		function(key)
 		{
-			sortedWordFreq[key] = wordFreq[key];
+			sortedWordFreqContainer[key] = wordFreqContainer[key];
 		});
 
-	return sortedWordFreq;
+	return sortedWordFreqContainer;
 }
 
 /**
  *
  */
-function sortCondWordFreq(condWordFreq)
+function sortCondWordFreqContainer(condWordFreqContainer)
 {
-	var sortedCondWordFreq = {};
+	var sortedCondWordFreqContainer = {};
 
-	for (var wordBefore in condWordFreq)
+	for (var wordBefore in condWordFreqContainer)
 	{
-		sortedCondWordFreq[wordBefore] = {};
-		for (var wordAfter in Object.keys(condWordFreq[wordBefore]).sort())
+		sortedCondWordFreqContainer[wordBefore] = {};
+		for (var wordAfter in Object.keys(
+			condWordFreqContainer[wordBefore]).sort())
 		{
-			sortedCondWordFreq[wordBefore][wordAfter] =
-				condWordFreq[wordBefore][wordAfter];
+			sortedCondWordFreqContainer[wordBefore][wordAfter] =
+				condWordFreqContainer[wordBefore][wordAfter];
 		}
 	}
 
-	return sortedCondWordFreq;
+	return sortedCondWordFreqContainer;
 }
 
 /**
  *
  */
-function pickFirstWord(probabilityForFirstWord, wordFreq)
+function pickFirstWord(probabilityForFirstWord, wordFreqContainer)
 {
 	var probabilityUpperBound = 0;
-	for (var word in wordFreq)
+	for (var word in wordFreqContainer)
 	{
-		probabilityUpperBound += wordFreq[word];
+		probabilityUpperBound += wordFreqContainer[word];
 
 		if (probabilityForFirstWord < probabilityUpperBound)
 		{
@@ -95,12 +96,16 @@ function pickFirstWord(probabilityForFirstWord, wordFreq)
 /**
  *
  */
-function pickNextWord(probabilityForCurrentWord, condWordFreq, previousWord)
+function pickNextWord(
+	probabilityForCurrentWord,
+	condWordFreqContainer,
+	previousWord)
 {
 	var probabilityUpperBound = 0;
-	for (var wordAfter in condWordFreq[previousWord])
+	for (var wordAfter in condWordFreqContainer[previousWord])
 	{
-		probabilityUpperBound += condWordFreq[previousWord][wordAfter];
+		probabilityUpperBound +=
+			condWordFreqContainer[previousWord][wordAfter];
 
 		if (probabilityForCurrentWord < probabilityUpperBound)
 		{
@@ -115,7 +120,7 @@ function pickNextWord(probabilityForCurrentWord, condWordFreq, previousWord)
 function makePoem(
 	numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine,
 	probabilitiesForWordsToBeWritten,
-	wordFreq, condWordFreq)
+	wordFreqContainer, condWordFreqContainer)
 {
 	var poem = "";
 
@@ -123,10 +128,11 @@ function makePoem(
 
 	var firstWord = pickFirstWord(
 		probabilitiesForWordsToBeWritten[indexOfProbabilityOfCurrentWord],
-		wordFreq);
+		wordFreqContainer);
 	poem += firstWord + " ";
 
 	++indexOfProbabilityOfCurrentWord;
+	var inclusionOfFirstWord = 1;
 
 	var previousWord = firstWord;
 	var nextWord = "";
@@ -141,19 +147,21 @@ function makePoem(
 			--numOfLinesPerStanzaToCreate)
 		{
 			for (
-				numOfWordsPerLineToCreate = numOfWordsPerLine;
+				numOfWordsPerLineToCreate =
+				numOfWordsPerLine - inclusionOfFirstWord;
 				numOfWordsPerLineToCreate > 0;
 				--numOfWordsPerLineToCreate)
 			{
 				nextWord = pickNextWord(
 					probabilitiesForWordsToBeWritten[
 					indexOfProbabilityOfCurrentWord],
-					condWordFreq, previousWord);
+					condWordFreqContainer, previousWord);
 
 				poem += nextWord + " ";
 
 				++indexOfProbabilityOfCurrentWord;
 			}
+			inclusionOfFirstWord = 0;
 			poem += "\n";
 			numOfWordsPerLineToCreate = numOfWordsPerLine;
 		}
@@ -177,16 +185,15 @@ function main(
 
 	var dataStructures = dataStructuresFile.getDataStructures(inputFileName);
 
-	// TODO remove
-	dataStructuresFile.displayDataStructures(dataStructures);
-
-	var wordFreq = sortWordFreq(dataStructures[wordFreq]);
-	var condWordFreq = sortCondWordFreq(dataStructures[condWordFreq]);
+	var wordFreqContainer = sortWordFreqContainer(
+		dataStructures["wordFreqContainer"]);
+	var condWordFreqContainer = sortCondWordFreqContainer(
+		dataStructures["condWordFreqContainer"]);
 
 	var poem = makePoem(
 		numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine,
 		probabilitiesForWordToBeWritten,
-		wordFreq, condWordFreq);
+		wordFreqContainer, condWordFreqContainer);
 
 	console.log(poem);
 

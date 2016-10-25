@@ -2,7 +2,7 @@
  * Parses the words of a specified text file such that the number of
  * occurrences of a word and the likelihood of a word's occurrence, as
  * well as the occurrences and likelihood of each word which appears directly
- * after that word, are calculated and printed to the console.
+ * after that word, are calculated and returned via an array of data structures.
  *
  * <p>Usage: node data_structures.js &lt;input_text_file&gt;
  *
@@ -288,10 +288,10 @@ function getDataStructures(inputFileName)
     calculateWordFrequencies(calculateWordCounts(inputFileWords));
 
     var dataStructures =
-        {"wordCount" : wordCountContainer,
-        "wordFreq" : wordFreqContainer,
-        "condWordCount" : condWordCountContainer,
-        "condWordFreq" : condWordFreqContainer};
+        {"wordCountContainer" : wordCountContainer,
+        "wordFreqContainer" : wordFreqContainer,
+        "condWordCountContainer" : condWordCountContainer,
+        "condWordFreqContainer" : condWordFreqContainer};
     return dataStructures;
 }
 
@@ -302,11 +302,11 @@ function getDataStructures(inputFileName)
 function displayDataStructures(dataStructures)
 {
     console.log("wordCount is " +
-        JSON.stringify(dataStructures["wordCount"], null, "  "));
+        JSON.stringify(dataStructures["wordCountContainer"], null, "  "));
     console.log("wordFreq is " +
-        JSON.stringify(dataStructures["wordFreq"], null, "  "));
+        JSON.stringify(dataStructures["wordFreqContainer"], null, "  "));
     console.log("condWordCount is " +
-        JSON.stringify(dataStructures["condWordCount"], null, "  "));
+        JSON.stringify(dataStructures["condWordCountContainer"], null, "  "));
     console.log("condWordFreq is " +
-        JSON.stringify(dataStructures["condWordFreq"], null, "  "));
+        JSON.stringify(dataStructures["condWordFreqContainer"], null, "  "));
 }
