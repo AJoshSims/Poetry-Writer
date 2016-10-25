@@ -10,6 +10,7 @@
  * @version 03 October 2016
  */
 
+// Imports and exports
 /**
  * Enables the exportation of this file's functions.
  */
@@ -24,6 +25,7 @@ exports.displayDataStructures = displayDataStructures;
  */
 var fs = require("fs");
 
+// Error codes
 /**
  *
  */
@@ -34,6 +36,12 @@ const CANNOT_READ_SPECIFIED_INPUT_FILE = 1;
  */
 const INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE = 2;
 
+/**
+ *
+ */
+const INPUT_FILE_PATH_NOT_STRING = 3;
+
+// Data structures
 /**
  * Describes how many times each word appears in the input file.
  */
@@ -57,27 +65,34 @@ var condWordCountContainer = {};
  */
 var condWordFreqContainer = {};
 
+// Functions
 /**
  * Reads and temporarily stores the contents the specified input file so that
  * it may be parsed.
  *
- * @param inputFileName - the name of the file to be parsed.
+ * @param inputFilePath - the name of the file to be parsed.
  *
  * @return inputFileContent - the contents of the input file as a string.
  */
-function readInputFile(inputFileName)
+function readInputFile(inputFilePath)
 {
+    if ((typeof inputFilePath).toLowerCase() != "string")
+    {
+        console.log("The specified path of the input file must be a string.\nAborting program...")
+        process.exit(INPUT_FILE_PATH_NOT_STRING);
+    }
+
     try
     {
         // Opens the input file for reading and reads its entirety while
         // storing its contents, as a string, into inputFileContent.
-        var inputFileContent = fs.readFileSync(inputFileName, "utf8");
+        var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
     }
 
     // If the specified file could not be read...
     catch(error)
     {
-        if (error.code == "ENOENT")
+        if (error.code === "ENOENT")
         {
             console.log("The specified input file does not exist or is not " +
                 "readable.\nAborting program...");
@@ -111,8 +126,8 @@ function parseInputFile(inputFileContent)
     // Aborts the program if the specified input file is either empty or
     // composed only of whitespace.
     var onlyWord = inputFileWords.length - 1;
-    if (inputFileWords.length == 1
-        && inputFileWords[onlyWord] == "")
+    if (inputFileWords.length === 1
+        && inputFileWords[onlyWord] === "")
     {
         console.log("Input can not be empty or only be whitespace.");
 
@@ -133,7 +148,7 @@ function wordCount(currentWord)
 {
     // If this word has not been encountered before, establish its existence in
     // the presentation data.
-    if (wordCountContainer[currentWord] == undefined)
+    if (wordCountContainer[currentWord] === undefined)
     {
         wordCountContainer[currentWord] = 1;
         condWordCountContainer[currentWord] = {};
@@ -160,7 +175,7 @@ function condWordCount(previousWord, currentWord)
     {
         // If current word has, until now, not been encountered after the
         // previous word, establishes its relationship to the previous word.
-        if (condWordCountContainer[previousWord][currentWord] == undefined) {
+        if (condWordCountContainer[previousWord][currentWord] === undefined) {
             condWordCountContainer[previousWord][currentWord] = 1;
         }
 
