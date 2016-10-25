@@ -46,10 +46,10 @@ function sortWordFreqContainer(wordFreqContainer)
 {
 	var sortedWordFreqContainer = {};
 
-	var keys = Object.keys(wordFreqContainer).sort().forEach(
-		function(key)
+	Object.keys(wordFreqContainer).sort().forEach(
+		function(word)
 		{
-			sortedWordFreqContainer[key] = wordFreqContainer[key];
+			sortedWordFreqContainer[word] = wordFreqContainer[word];
 		});
 
 	return sortedWordFreqContainer;
@@ -60,19 +60,22 @@ function sortWordFreqContainer(wordFreqContainer)
  */
 function sortCondWordFreqContainer(condWordFreqContainer)
 {
+	console.log(condWordFreqContainer);
 	var sortedCondWordFreqContainer = {};
 
 	for (var wordBefore in condWordFreqContainer)
 	{
 		sortedCondWordFreqContainer[wordBefore] = {};
-		for (var wordAfter in Object.keys(
-			condWordFreqContainer[wordBefore]).sort())
-		{
-			sortedCondWordFreqContainer[wordBefore][wordAfter] =
-				condWordFreqContainer[wordBefore][wordAfter];
-		}
+
+		Object.keys(condWordFreqContainer[wordBefore]).sort().forEach(
+			function(wordAfter)
+			{
+				sortedCondWordFreqContainer[wordBefore][wordAfter] =
+					condWordFreqContainer[wordBefore][wordAfter];
+			});
 	}
 
+	console.log(sortedCondWordFreqContainer);
 	return sortedCondWordFreqContainer;
 }
 
