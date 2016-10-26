@@ -2,7 +2,7 @@
  * Parses the words of a specified text file such that the number of
  * occurrences of a word and the likelihood of a word's occurrence, as
  * well as the occurrences and likelihood of each word which appears directly
- * after that word, are calculated and returned via an array of data structures.
+ * after that word, are calculated and stored in objects.
  *
  * <p>Usage: node data_structures.js &lt;input_text_file&gt;
  *
@@ -27,17 +27,19 @@ var fs = require("fs");
 
 // Error codes
 /**
- *
+ * Error code indicating that the specified input file either does not exist
+ * or is not readable.
  */
 const CANNOT_READ_SPECIFIED_INPUT_FILE = 1;
 
 /**
- *
+ * Error code indicating that the specified input file is empty or is composed
+ * of only whitespace.
  */
 const INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE = 2;
 
 /**
- *
+ * Error code indicating that the argument for the input file is not a string.
  */
 const INPUT_FILE_PATH_NOT_STRING = 3;
 
@@ -70,7 +72,7 @@ var condWordFreqContainer = {};
  * Reads and temporarily stores the contents the specified input file so that
  * it may be parsed.
  *
- * @param inputFilePath - the name of the file to be parsed.
+ * @param inputFilePath - the path of the file to be parsed.
  *
  * @return inputFileContent - the contents of the input file as a string.
  */
@@ -293,8 +295,10 @@ function calculateWordFrequencies(numOfWords)
  *
  * @param inputFileName - the name of the file to be parsed
  *
- * @return dataStructures - the counts and likelihoods of the words in the
- *     input file.
+ * @return dataStructures - objects containing information regarding the number
+ *     of occurrences of each word in the input file and the likelihood of each
+ *     word's occurrence, as well as the occurrences and likelihood of each
+ *     word which appears directly after
  */
 function getDataStructures(inputFileName)
 {
@@ -311,8 +315,15 @@ function getDataStructures(inputFileName)
 }
 
 /**
- * Prints to the console the information gathered about the words in the
- * specified input file.
+ * Prints to standard output the string equivalents of the objects containing
+ * information regarding the number of occurrences of each word in the input
+ * file and the likelihood of each word's occurrence, as well as the
+ * occurrences and likelihood of each word which appears directly after.
+ *
+ * @param dataStructures - objects containing information regarding the number
+ *     of occurrences of each word in the input file and the likelihood of each
+ *     word's occurrence, as well as the occurrences and likelihood of each
+ *     word which appears directly after
  */
 function displayDataStructures(dataStructures)
 {

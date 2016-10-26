@@ -1,6 +1,16 @@
-// TODO ignore unexpected number syntax error?
+/**
+ * Prints a poem whose composing words are determined by the frequency of words
+ * in a specified text file and the frequency at which they proceed certain
+ * other words in that file.
+ *
+ * <p>This program is run by calling the function named main from within this
+ * file.
+ *
+ * @author Joshua Sims
+ * @version 25 October 2016
+ */
 
-// Imports
+// Imports and exports
 /**
  * Contains the functions for creating and printing the wordCount, wordFreq,
  * condWordCount, and condWordFreq data structures.
@@ -55,9 +65,9 @@ const INDEX_OF_PROBABILITY_OF_FIRST_WORD = 0;
 const ONE_WORD = 1;
 
 /**
- * Only one word remains to be written for the current line, in the poem.
+ * The last word for the current line has been written.
  */
-const ONE_WORD_LEFT = 1;
+const NO_WORDS_LEFT_TO_CREATE_FOR_THIS_LINE = 1;
 
 // Program entry point
 // Modify this line to specify the arguments which govern the production of
@@ -80,6 +90,7 @@ function abortIfNotIntegers(
 {
 	var abort = false;
 
+	// If not a number or an integer.
 	if (((typeof numOfStanzas).toLowerCase() != "number")
 		|| ((numOfStanzas % 1) != 0))
 	{
@@ -132,8 +143,8 @@ function abortIfProbabilitiesArrayIsInvalid(probabilitiesForWordToBeWritten)
 }
 
 /**
- *  * Aborts the program if the length of the probabilities array is not equal to
- * the number of words that will constitute the poem.
+ * Aborts the program if the length of the probabilities array is not equal
+ * to the number of words that will constitute the poem.
  *
  * @param numOfStanzas - the number of stanzas in the poem produced
  * @param numOfLinesPerStanza - the number of lines per stanza in the poem
@@ -283,12 +294,17 @@ function pickFirstWord(probabilityForFirstWord, wordFreqContainer)
 {
 	var firstWord = "";
 
-	var probabilityUpperBound = 0;
+	var upperBound = 0;
+
+	// If the probability specified by the user is less than the probability
+	// of the currently examined input file word plus the probability of the
+	// previously examined input file word, return the currently examined
+	// input file word.
 	for (var word in wordFreqContainer)
 	{
-		probabilityUpperBound += wordFreqContainer[word];
+		upperBound += wordFreqContainer[word];
 
-		if (probabilityForFirstWord < probabilityUpperBound)
+		if (probabilityForFirstWord < upperBound)
 		{
 			firstWord = word;
 			return firstWord;
@@ -320,13 +336,18 @@ function pickNextWord(
 {
 	var nextWord = "";
 
-	var probabilityUpperBound = 0;
+	var upperBound = 0;
+
+	// If the probability specified by the user is less than the probability
+	// of the currently examined input file word plus the probability of the
+	// previously examined input file word, return the currently examined
+	// input file word.
 	for (var wordAfter in condWordFreqContainer[previousWord])
 	{
-		probabilityUpperBound +=
+		upperBound +=
 			condWordFreqContainer[previousWord][wordAfter];
 
-		if (probabilityForCurrentWord < probabilityUpperBound)
+		if (probabilityForCurrentWord < upperBound)
 		{
 			nextWord = wordAfter;
 			return nextWord;
@@ -416,7 +437,7 @@ function makePoem(
 	}
 
 	++indexOfProbabilityOfCurrentWordToBeWritten;
-	var inclusionOfFirstWord = 1;
+	var inclusionOfFirstWordInThisLine = 1;
 
 	var previousWord = firstWord;
 	var nextWord = "";
@@ -432,7 +453,7 @@ function makePoem(
 		{
 			for (
 				numOfWordsPerLineToCreate =
-				numOfWordsPerLine - inclusionOfFirstWord;
+				numOfWordsPerLine - inclusionOfFirstWordInThisLine;
 				numOfWordsPerLineToCreate > 0;
 				--numOfWordsPerLineToCreate)
 			{
@@ -448,7 +469,8 @@ function makePoem(
 
 				poem += nextWord;
 
-				if (numOfWordsPerLineToCreate != ONE_WORD_LEFT)
+				if (numOfWordsPerLineToCreate !=
+					NO_WORDS_LEFT_TO_CREATE_FOR_THIS_LINE)
 				{
 					poem += " ";
 				}
@@ -456,7 +478,7 @@ function makePoem(
 				previousWord = nextWord;
 				++indexOfProbabilityOfCurrentWordToBeWritten;
 			}
-			inclusionOfFirstWord = 0;
+			inclusionOfFirstWordInThisLine = 0;
 			poem += "\n";
 			numOfWordsPerLineToCreate = numOfWordsPerLine;
 		}
@@ -467,15 +489,30 @@ function makePoem(
 }
 
 /**
- * 
+ * Prints a poem whose composing words are determined by the frequency of words
+ * in a specified text file and the frequency at which they proceed certain
+ * other words in that file.
+ *
+ * @param inputFilePath - the path of the file to be parsed.
+ * @param numOfStanzas - the number of stanzas in the poem produced
+ * @param numOfLinesPerStanza - the number of lines per stanza in the poem
+ *     produced
+ * @param numOfWordsPerLine - the number of words per line in the poem
+ *     produced
+ * @param probabilitiesForWordToBeWritten - the array containing the
+ *     supposedly random probabilities which govern which words constitute the
+ *     poem which is produced
+ * @param displayDataStructuresChoice - represents the
+ *     choice to display the wordCount, wordFreq, condWordCount, and
+ *     condWordFreq data structures
  */
 function main(
-	inputFileName,
+	inputFilePath,
 	numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine,
 	probabilitiesForWordToBeWritten,
 	displayDataStructuresChoice)
 {
-	var dataStructures = dataStructuresFile.getDataStructures(inputFileName);
+	var dataStructures = dataStructuresFile.getDataStructures(inputFilePath);
 
 	abortIfArgsAreUnacceptable(
 		numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine,
