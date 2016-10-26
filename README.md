@@ -1,4 +1,7 @@
-# Word-Counter
-Parses the words of a specified text file such that the number of occurrences of a word and the likelihood of a word's occurrence, as well as the occurrences and likelihood of each word which appears directly after that word, are calculated and printed to the console.
+# Poetry-Writer
+Prints a poem whose composing words are determined by the frequency of words in a specified text file and the frequency at which they proceed certain other words in that file.
 
-Usage: node data_structures.js <input_text_file>
+<p>This program is run by calling the function named main from within make_poem.js. See the function header for main in make_poem.js for parameter details.
+
+@author Joshua Sims
+@version 25 October 2016
