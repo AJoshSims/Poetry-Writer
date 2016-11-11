@@ -15,6 +15,14 @@
  * Enables the exportation of this file's functions.
  */
 var exports = module.exports = {};
+exports.readInputFile = readInputFile;
+exports.parseInputFile = parseInputFile;
+exports.wordCount = wordCount;
+exports.condWordCount = condWordCount;
+exports.calculateWordCounts = calculateWordCounts;
+exports.wordFreq = wordFreq;
+exports.condWordFreq = condWordFreq;
+exports.calculateWordFreqs = calculateWordFreqs;
 exports.getDataStructures = getDataStructures;
 exports.displayDataStructures = displayDataStructures;
 
@@ -278,7 +286,7 @@ function condWordFreq()
  *
  * @param numOfWords - the number of words in the input file
  */
-function calculateWordFrequencies(numOfWords)
+function calculateWordFreqs(numOfWords)
 {
     wordFreq(numOfWords);
 
@@ -302,7 +310,7 @@ function getDataStructures(inputFileName)
 {
     var inputFileWords = parseInputFile(readInputFile(inputFileName));
 
-    calculateWordFrequencies(calculateWordCounts(inputFileWords));
+    calculateWordFreqs(calculateWordCounts(inputFileWords));
 
     var dataStructures =
         {"wordCountContainer" : wordCountContainer,
