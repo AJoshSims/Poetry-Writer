@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Word-Counter.iml" filepath="$PROJECT_DIR$/.idea/Word-Counter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/poetry-writer.iml" filepath="$PROJECT_DIR$/.idea/poetry-writer.iml" />
     </modules>
   </component>
 </project>

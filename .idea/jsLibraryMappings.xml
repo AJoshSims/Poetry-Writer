@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <includedPredefinedLibrary name="Node.js Core" />
+    <file url="file://$PROJECT_DIR$/project3/app" libraries="{poetry-writer/project3/app/node_modules}" />
+    <file url="PROJECT" libraries="{node-DefinitelyTyped, poetry-writer/project3/app/node_modules}" />
+    <includedPredefinedLibrary name="ECMAScript 6" />
   </component>
 </project>
