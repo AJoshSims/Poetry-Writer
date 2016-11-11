@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f476fd68-c797-4868-bd04-1fb5bee0dd40" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Beowulf.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/empty_input_text.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rbbrrg_input_text.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rbrbb_input_text.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/thing.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project3/app/qa/tests_data_structures.js" afterPath="$PROJECT_DIR$/project3/app/qa/tests_data_structures.js" />
     </list>
     <ignored path="poetry-writer.iws" />
@@ -67,9 +62,11 @@
       <file leaf-file-name="tests_data_structures.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_data_structures.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="572">
+              <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -262,12 +259,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1478895698878</updated>
-      <workItem from="1478895701131" duration="732000" />
+      <workItem from="1478895701131" duration="1189000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="732000" />
+    <option name="totallyTimeSpent" value="1189000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3232" height="1732" extended-state="6" />
@@ -337,9 +334,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_data_structures.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="572">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
