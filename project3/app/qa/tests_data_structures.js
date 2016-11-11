@@ -1,5 +1,3 @@
-var assertions = require("chai").assert;
-
 suiteSetup("setup of A", function()
 {
 	var array01 = [6, 7, 8];
@@ -14,7 +12,7 @@ suiteSetup("setup of A", function()
 			{
 				array02.pop();
 
-				assert.deepEqual(array02, ["nothing"]);
+				assert.isArray(array02);
 				teardown("teardown of A.A", function()
 				{
 					array02 = null;
