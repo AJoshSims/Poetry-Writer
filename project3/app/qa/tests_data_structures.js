@@ -1,34 +1,39 @@
-// suiteSetup("setup of A", function()
-// {
-// 	var array01 = [6, 7, 8];
-//
-// 	suite("A", function()
-// 	{
-// 		setup("setup of A.A", function()
-// 		{
-// 			var array02 = ["nothing", "something"];
-//
-// 			test("A.A", function()
-// 			{
-// 				array02.pop();
-//
-// 				assert.isArray(array02);
-// 				teardown("teardown of A.A", function()
-// 				{
-// 					array02 = null;
-// 				});
-// 			});
-// 		});
-//
-// 		suiteTeardown("teardown of A", function()
-// 		{
-// 			array01 = null;
-// 		});
-// 	});
-// });
-var assert = require("assert");
+var assert = require("chai").assert;
 
-test("mocha pls", function()
+// TODO remove
+// Success
+// test("mocha pls", function()
+// {
+// 	var string01 = "y tho mocha";
+// 	assert.deepEqual(string01, "y tho mochy", "mocha. pls.");
+// });
+
+suite("Tests for data_structures.js", function()
 {
-	assert.equal(0, 3, "mocha plsss");
+	suiteSetup("setting up suite...", function()
+	{
+
+	});
+
+	setup("setting up test 01...", function()
+	{
+
+	});
+
+	test("test 01", function()
+	{
+		var morchapls = "morchapls";
+
+		assert.deepEqual(morchapls, "morchapls", "mocha. pls.");
+	});
+
+	teardown("tearing down test 01...", function()
+	{
+
+	});
+
+	suiteTeardown("tearing down suite...", function()
+	{
+
+	});
 });
