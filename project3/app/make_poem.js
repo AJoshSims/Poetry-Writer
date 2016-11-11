@@ -12,6 +12,15 @@
 
 // Imports and exports
 /**
+ * Enables the exportation of this file's functions.
+ */
+var exports = module.exports = {};
+exports.main = main;
+exports.makePoem = makePoem;
+exports.pickFirstWord = pickFirstWord;
+exports.pickNextWord = pickNextWord;
+
+/**
  * Contains the functions for creating and printing the wordCount, wordFreq,
  * condWordCount, and condWordFreq data structures.
  */

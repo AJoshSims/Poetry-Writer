@@ -15,8 +15,6 @@
  * Enables the exportation of this file's functions.
  */
 var exports = module.exports = {};
-
-// exported functions
 exports.getDataStructures = getDataStructures;
 exports.displayDataStructures = displayDataStructures;
 
