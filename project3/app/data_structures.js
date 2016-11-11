@@ -87,32 +87,23 @@ function readInputFile(inputFilePath)
     if ((typeof inputFilePath).toLowerCase() != "string")
     {
         console.log("The specified path of the input file must be a string.\nAborting program...")
-        process.exit(INPUT_FILE_PATH_NOT_STRING);
+        var inputFilePathError = new Error();
+        inputFilePathError.code = 3;
     }
 
-    try
-    {
-        // Opens the input file for reading and reads its entirety while
-        // storing its contents, as a string, into inputFileContent.
-        var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
-    }
+    // Opens the input file for reading and reads its entirety while
+    // storing its contents, as a string, into inputFileContent.
+    var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
 
+    // TODO remove
     // If the specified file could not be read...
-    catch(error)
-    {
-        if (error.code === "ENOENT")
-        {
-            console.log("The specified input file does not exist or is not " +
-                "readable.\nAborting program...");
-
-            process.exit(CANNOT_READ_SPECIFIED_INPUT_FILE);
-        }
-        else
-        {
-            //Unknown error. This should never execute.
-            throw error;
-        }
-    }
+    // if (error.code === "ENOENT")
+    // {
+    //     console.log("The specified input file does not exist or is not " +
+    //         "readable.\nAborting program...");
+    //
+    //     process.exit(CANNOT_READ_SPECIFIED_INPUT_FILE);
+    // }
 
     return inputFileContent;
 }
