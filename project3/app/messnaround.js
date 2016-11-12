@@ -26,20 +26,27 @@ var DisplayDataStructuresChoiceIsNotBooleanError =
 var InvalidProbabilityError =
 	errors.InvalidProbabilityError;
 
+var fs = require("fs");
+
 function wreckIt()
 {
 	// var failureFile = fs.readFileSync("failureFilePath", "utf8");
 	throw new InputFileDoesNotExistError();
 }
 
-try
-{
+// try
+// {
 	wreckIt();
-}
-catch (error)
-{
-	console.log(error.message);
-	process.exit(error.code);
-}
+// }
+// catch (error)
+// {
+// 	if (error.code === "ENOENT")
+// 	{
+// 		console.log(error.message);
+// 		process.exit(error.errno);
+// 	}
+// 	console.log(error.message);
+// 	process.exit(error.code);
+// }
 
 console.log("Whoah, we didn't crash");

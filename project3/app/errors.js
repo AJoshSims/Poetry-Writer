@@ -101,7 +101,7 @@ function InputFilePathIsNotStringError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified path of the input file is not a string.";
-	this.code = INPUT_FILE_PATH_IS_NOT_STRING;
+	this.errno = INPUT_FILE_PATH_IS_NOT_STRING;
 }
 
 function InputFileDoesNotExistError()
@@ -109,7 +109,7 @@ function InputFileDoesNotExistError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified input file does not exist";
-	this.code = INPUT_FILE_DOES_NOT_EXIST;
+	this.errno = INPUT_FILE_DOES_NOT_EXIST;
 }
 
 function InputFilePathPointsToDirectoryError()
@@ -117,7 +117,7 @@ function InputFilePathPointsToDirectoryError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified input file path points to a directory -- not a file.";
-	this.code = INPUT_FILE_PATH_POINTS_TO_DIRECTORY;
+	this.errno = INPUT_FILE_PATH_POINTS_TO_DIRECTORY;
 }
 
 function CannotReadInputFileError()
@@ -125,7 +125,7 @@ function CannotReadInputFileError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified input file cannot be read.";
-	this.code = CANNOT_READ_INPUT_FILE;
+	this.errno = CANNOT_READ_INPUT_FILE;
 }
 
 function TooManyOpenFilesError()
@@ -133,7 +133,7 @@ function TooManyOpenFilesError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "There are too many open files in the system.";
-	this.code = TOO_MANY_OPEN_FILES;
+	this.errno = TOO_MANY_OPEN_FILES;
 }
 
 function InputCannotBeEmptyOrOnlyWhitespaceError()
@@ -141,7 +141,7 @@ function InputCannotBeEmptyOrOnlyWhitespaceError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "Input can not be empty or only be whitespace.";
-	this.code = INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE;
+	this.errno = INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE;
 }
 
 function StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError(message)
@@ -149,7 +149,7 @@ function StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError(message)
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = message;
-	this.code = STANZAS_OR_LINES_PER_STANZA_OR_WORDS_PER_LINE_IS_NOT_INTEGER;
+	this.errno = STANZAS_OR_LINES_PER_STANZA_OR_WORDS_PER_LINE_IS_NOT_INTEGER;
 }
 
 function ProbabilitiesArrayIsNotArrayError()
@@ -157,7 +157,7 @@ function ProbabilitiesArrayIsNotArrayError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified probabilities array must be an array.";
-	this.code = PROBABILITIES_ARRAY_IS_NOT_ARRAY;
+	this.errno = PROBABILITIES_ARRAY_IS_NOT_ARRAY;
 }
 
 function ProbabilitiesArrayIsEmptyError()
@@ -165,7 +165,7 @@ function ProbabilitiesArrayIsEmptyError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified probabilities array is empty.";
-	this.code = PROBABILITIES_ARRAY_IS_EMPTY;
+	this.errno = PROBABILITIES_ARRAY_IS_EMPTY;
 }
 
 function LengthOfProbabilitiesIsNotEqualToNumOfPoemWordsError()
@@ -173,7 +173,7 @@ function LengthOfProbabilitiesIsNotEqualToNumOfPoemWordsError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The number of probabilities in the specified array of probabilities is not equal to the number of words specified to form the poem.";
-	this.code = LENGTH_OF_PROBABILITIES_IS_NOT_EQUAL_TO_NUM_OF_POEM_WORDS;
+	this.errno = LENGTH_OF_PROBABILITIES_IS_NOT_EQUAL_TO_NUM_OF_POEM_WORDS;
 }
 
 function DisplayDataStructuresChoiceIsNotBooleanError()
@@ -181,7 +181,7 @@ function DisplayDataStructuresChoiceIsNotBooleanError()
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = "The specified choice indicating whether or not to display the data structures is not a boolean.";
-	this.code = DISPLAY_DATA_STRUCTURES_CHOICE_IS_NOT_BOOLEAN;
+	this.errno = DISPLAY_DATA_STRUCTURES_CHOICE_IS_NOT_BOOLEAN;
 }
 
 function InvalidProbabilityError(message)
@@ -189,5 +189,5 @@ function InvalidProbabilityError(message)
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;
 	this.message = message;
-	this.code = INVALID_PROBABILITY;
+	this.errno = INVALID_PROBABILITY;
 }

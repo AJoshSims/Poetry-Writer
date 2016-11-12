@@ -24,13 +24,13 @@ exports.makePoem = makePoem;
 exports.pickFirstWord = pickFirstWord;
 exports.pickNextWord = pickNextWord;
 
+var errors = require("./errors");
+
 /**
  * Contains the functions for creating and printing the wordCount, wordFreq,
  * condWordCount, and condWordFreq data structures.
  */
 var dataStructuresFile = require("./data_structures.js");
-
-var errors = require("./errors");
 
 // Miscellaneous constants
 /**
@@ -48,10 +48,18 @@ const ONE_WORD = 1;
  */
 const NO_WORDS_LEFT_TO_CREATE_FOR_THIS_LINE = 1;
 
+try
+{
 // Program entry point
 // Modify this line to specify the arguments which govern the production of
 // the poem.
 	main("rbbrrg_input_text.txt", 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], true);
+}
+catch (error)
+{
+	console.log(error.message + "\nAborting program...");
+	process.exit(error.errno);
+}
 
 // Functions
 /**
@@ -210,11 +218,10 @@ function sortWordFreqContainer(wordFreqContainer)
 {
 	var sortedWordFreqContainer = {};
 
-	Object.keys(wordFreqContainer).sort().forEach(
-		function(word)
-		{
-			sortedWordFreqContainer[word] = wordFreqContainer[word];
-		});
+	Object.keys(wordFreqContainer).sort().forEach(function(word)
+	{
+		sortedWordFreqContainer[word] = wordFreqContainer[word];
+	});
 
 	return sortedWordFreqContainer;
 }
@@ -244,10 +251,10 @@ function sortCondWordFreqContainer(condWordFreqContainer)
 
 		Object.keys(condWordFreqContainer[wordBefore]).sort().forEach(
 			function(wordAfter)
-			{
-				sortedCondWordFreqContainer[wordBefore][wordAfter] =
-					condWordFreqContainer[wordBefore][wordAfter];
-			});
+		{
+			sortedCondWordFreqContainer[wordBefore][wordAfter] =
+				condWordFreqContainer[wordBefore][wordAfter];
+		});
 	}
 
 	return sortedCondWordFreqContainer;

@@ -28,6 +28,8 @@ exports.calculateWordFreqs = calculateWordFreqs;
 exports.getDataStructures = getDataStructures;
 exports.displayDataStructures = displayDataStructures;
 
+var errors = require("./errors");
+
 /**
  * Enables file I/O operations.
  */
@@ -70,24 +72,33 @@ function readInputFile(inputFilePath)
 {
     if ((typeof inputFilePath).toLowerCase() != "string")
     {
-        console.log("The specified path of the input file must be a string.\nAborting program...")
-        var inputFilePathError = new Error();
-        inputFilePathError.code = 3;
+        throw new errors.InputFilePathIsNotStringError();
     }
 
-    // Opens the input file for reading and reads its entirety while
-    // storing its contents, as a string, into inputFileContent.
-    var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
+    try
+    {
+        // Opens the input file for reading and reads its entirety while
+        // storing its contents, as a string, into inputFileContent.
+        var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
+    }
 
-    // TODO remove
-    // If the specified file could not be read...
-    // if (error.code === "ENOENT")
-    // {
-    //     console.log("The specified input file does not exist or is not " +
-    //         "readable.\nAborting program...");
-    //
-    //     process.exit(CANNOT_READ_SPECIFIED_INPUT_FILE);
-    // }
+    catch (error)
+    {
+        switch (error.code)
+        {
+            case "ENOENT":
+                throw new errors.InputFileDoesNotExistError();
+                break;
+            case "EISDIR":
+                throw new errors.InputFilePathPointsToDirectoryError();
+                break;
+            case "EACCES":
+                throw new errors.CannotReadInputFileError();
+                break;
+            case "EMFILE":
+                throw new errors.TooManyOpenFilesError();
+        }
+    }
 
     return inputFileContent;
 }
@@ -112,9 +123,7 @@ function parseInputFile(inputFileContent)
     if (inputFileWords.length === 1
         && inputFileWords[onlyWord] === "")
     {
-        console.log("Input can not be empty or only be whitespace.");
-
-        process.exit(INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE);
+        throw new errors.InputCannotBeEmptyOrOnlyWhitespaceError();
     }
 
     return inputFileWords;
