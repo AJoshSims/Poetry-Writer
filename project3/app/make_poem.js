@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Prints a poem whose composing words are determined by the frequency of words
  * in a specified text file and the frequency at which they proceed certain
@@ -12,9 +14,11 @@
 
 // Imports and exports
 /**
- * Enables the exportation of this file's functions.
+ * Enables the exportation of this file's components.
  */
 var exports = module.exports = {};
+
+// TODO export as functions
 exports.main = main;
 exports.makePoem = makePoem;
 exports.pickFirstWord = pickFirstWord;
@@ -25,42 +29,6 @@ exports.pickNextWord = pickNextWord;
  * condWordCount, and condWordFreq data structures.
  */
 var dataStructuresFile = require("./data_structures.js");
-
-// Error codes
-/**
- * Error code indicating that either the specified stanzas, specified lines per
- * stanza, or the specified words per line is not an integer.
- */
-const STANZAS_OR_LINES_PER_STANZA_OR_WORDS_PER_LINE_NOT_INTEGER = 4;
-
-/**
- * Error code indicating that the probabilities array is not an array.
- */
-const PROBABILITIES_ARRAY_NOT_ARRAY = 5;
-
-/**
- * Error code indicating that an empty probabilities array was passed.
- */
-const PROBABILITIES_ARRAY_IS_EMPTY = 6;
-
-/**
- * Error indicating that the length of the probabilities array is not equal to
- * the number of words that will constitute the poem.
- */
-const LENGTH_OF_PROBABILITIES_NOT_EQUAL_NUM_OF_POEM_WORDS = 7;
-
-/**
- * Error code indicating that displayDataStructuresChoice, which represents the
- * choice to display the data structures, is not a boolean.
- */
-const ABORT_IF_DISPLAY_DATA_STRUCTURES_CHOICE_NOT_BOOLEAN = 8;
-
-/**
- * Error code indicating that an element of the probabilities array is not a
- * number or that there exists a probability in the array that is less than 0
- * or greater than 1.
- */
-const INVALID_PROBABILITY = 9;
 
 // Miscellaneous constants
 /**
@@ -124,7 +92,7 @@ function abortIfNotIntegers(
 
 	if (abort)
 	{
-		process.exit(STANZAS_OR_LINES_PER_STANZA_OR_WORDS_PER_LINE_NOT_INTEGER);
+		process.exit(STANZAS_OR_LINES_PER_STANZA_OR_WORDS_PER_LINE_IS_NOT_INTEGER);
 	}
 }
 
@@ -141,7 +109,7 @@ function abortIfProbabilitiesArrayIsInvalid(probabilitiesForWordToBeWritten)
 	if (!Array.isArray(probabilitiesForWordToBeWritten))
 	{
 		console.log("The probabilities array must be an array.");
-		process.exit(PROBABILITIES_ARRAY_NOT_ARRAY);
+		process.exit(PROBABILITIES_ARRAY_IS_NOT_ARRAY);
 	}
 
 	if (probabilitiesForWordToBeWritten.length === 0)
@@ -172,7 +140,7 @@ function abortIfProbabilitiesArrayLengthNotEqualsNumOfPoemWords(
 		numOfStanzas * numOfLinesPerStanza * numOfWordsPerLine)
 	{
 		console.log("The number of probabilities in the array of probabilities is not equal to the number of words that will form the poem.\nAborting program...");
-		process.exit(LENGTH_OF_PROBABILITIES_NOT_EQUAL_NUM_OF_POEM_WORDS);
+		process.exit(LENGTH_OF_PROBABILITIES_IS_NOT_EQUAL_TO_NUM_OF_POEM_WORDS);
 	}
 }
 
@@ -190,7 +158,7 @@ function abortIfdisplayDataStructuresChoiceNotBoolean(
 		&& displayDataStructuresChoice.toString().toLowerCase() != "false")
 	{
 		console.log("displayDataStructuresChoice is not a boolean.\nAborting program...");
-		process.exit(ABORT_IF_DISPLAY_DATA_STRUCTURES_CHOICE_NOT_BOOLEAN);
+		process.exit(DISPLAY_DATA_STRUCTURES_CHOICE_IS_NOT_BOOLEAN);
 	}
 }
 

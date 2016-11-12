@@ -1,3 +1,5 @@
+"use strict";
+
 var assert = require("chai").assert;
 
 suite("Tests for data_structures.js", function()

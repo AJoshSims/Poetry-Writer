@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Parses the words of a specified text file such that the number of
  * occurrences of a word and the likelihood of a word's occurrence, as
@@ -30,24 +32,6 @@ exports.displayDataStructures = displayDataStructures;
  * Enables file I/O operations.
  */
 var fs = require("fs");
-
-// Error codes
-/**
- * Error code indicating that the specified input file either does not exist
- * or is not readable.
- */
-const CANNOT_READ_SPECIFIED_INPUT_FILE = 1;
-
-/**
- * Error code indicating that the specified input file is empty or is composed
- * of only whitespace.
- */
-const INPUT_CANNOT_BE_EMPTY_OR_ONLY_WHITESPACE = 2;
-
-/**
- * Error code indicating that the argument for the input file is not a string.
- */
-const INPUT_FILE_PATH_NOT_STRING = 3;
 
 // Data structures
 /**
