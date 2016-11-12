@@ -1,8 +1,31 @@
-'use strict';
+"use strict";
 
 // Imports and exports
 var exports = module.exports = {};
-exports.InputFilePathIsNotStringError = InputFilePathIsNotStringError;
+exports.InputFilePathIsNotStringError =
+	InputFilePathIsNotStringError;
+exports.InputFileDoesNotExistError =
+	InputFileDoesNotExistError;
+exports.InputFilePathPointsToDirectoryError =
+	InputFilePathPointsToDirectoryError;
+exports.CannotReadInputFileError =
+	CannotReadInputFileError;
+exports.TooManyOpenFilesError =
+	TooManyOpenFilesError;
+exports.InputCannotBeEmptyOrOnlyWhitespaceError =
+	InputCannotBeEmptyOrOnlyWhitespaceError;
+exports.StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError =
+	StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError;
+exports.ProbabilitiesArrayIsNotArrayError =
+	ProbabilitiesArrayIsNotArrayError;
+exports.ProbabilitiesArrayIsEmptyError =
+	ProbabilitiesArrayIsEmptyError;
+exports.LengthOfProbabilitiesIsNotEqualToNumOfPoemWordsError =
+	LengthOfProbabilitiesIsNotEqualToNumOfPoemWordsError;
+exports.DisplayDataStructuresChoiceIsNotBooleanError =
+	DisplayDataStructuresChoiceIsNotBooleanError;
+exports.InvalidProbabilityError =
+	InvalidProbabilityError;
 
 // Exit codes
 /**
@@ -161,7 +184,7 @@ function DisplayDataStructuresChoiceIsNotBooleanError()
 	this.code = DISPLAY_DATA_STRUCTURES_CHOICE_IS_NOT_BOOLEAN;
 }
 
-function InvalidProbabiityError(message)
+function InvalidProbabilityError(message)
 {
 	Error.captureStackTrace(this, this.constructor);
 	this.name = this.constructor.name;

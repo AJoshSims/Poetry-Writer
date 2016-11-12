@@ -30,6 +30,8 @@ exports.pickNextWord = pickNextWord;
  */
 var dataStructuresFile = require("./data_structures.js");
 
+var errors = require("./errors");
+
 // Miscellaneous constants
 /**
  * The first word within the probabilities array.
@@ -65,34 +67,34 @@ const NO_WORDS_LEFT_TO_CREATE_FOR_THIS_LINE = 1;
 function abortIfNotIntegers(
 	numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine)
 {
+	var errorMessage = null;
 	var abort = false;
 
 	// If not a number or an integer.
 	if (((typeof numOfStanzas).toLowerCase() != "number")
 		|| ((numOfStanzas % 1) != 0))
 	{
-		console.log(
-			"The specified number of stanzas must be an integer.\nAborting program...");
+		errorMessage = "The specified number of stanzas must be an integer";
 		abort = true;
 	}
 	if (((typeof numOfLinesPerStanza).toLowerCase() != "number")
 		|| ((numOfLinesPerStanza % 1) != 0))
 	{
-		console.log(
-			"The specified number of lines per stanza must be an integer\nAborting program...");
+		errorMessage = "The specified number of lines per stanza must be an integer";
 		abort = true;
 	}
 	if (((typeof numOfWordsPerLine).toLowerCase() != "number")
 		|| ((numOfWordsPerLine % 1) != 0))
 	{
-		console.log(
-			"The specified number of words per line must be an integer\nAborting program...");
+		errorMessage = "The specified number of words per line must be an integer";
 		abort = true;
 	}
 
 	if (abort)
 	{
-		process.exit(STANZAS_OR_LINES_PER_STANZA_OR_WORDS_PER_LINE_IS_NOT_INTEGER);
+		throw new errors.
+			StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError(
+			errorMessage);
 	}
 }
 
@@ -108,14 +110,12 @@ function abortIfProbabilitiesArrayIsInvalid(probabilitiesForWordToBeWritten)
 {
 	if (!Array.isArray(probabilitiesForWordToBeWritten))
 	{
-		console.log("The probabilities array must be an array.");
-		process.exit(PROBABILITIES_ARRAY_IS_NOT_ARRAY);
+		throw new errors.ProbabilitiesArrayIsNotArrayError();
 	}
 
 	if (probabilitiesForWordToBeWritten.length === 0)
 	{
-		console.log("You have passed an empty probabilities array\nAborting program...")
-		process.exit(PROBABILITIES_ARRAY_IS_EMPTY);
+		throw new errors.ProbabilitiesArrayIsEmptyError();
 	}
 }
 
@@ -139,8 +139,8 @@ function abortIfProbabilitiesArrayLengthNotEqualsNumOfPoemWords(
 	if (probabilitiesForWordToBeWritten.length !=
 		numOfStanzas * numOfLinesPerStanza * numOfWordsPerLine)
 	{
-		console.log("The number of probabilities in the array of probabilities is not equal to the number of words that will form the poem.\nAborting program...");
-		process.exit(LENGTH_OF_PROBABILITIES_IS_NOT_EQUAL_TO_NUM_OF_POEM_WORDS);
+		throw new errors.
+			LengthOfProbabilitiesIsNotEqualToNumOfPoemWordsError();
 	}
 }
 
@@ -157,8 +157,7 @@ function abortIfdisplayDataStructuresChoiceNotBoolean(
 	if (displayDataStructuresChoice.toString().toLowerCase() != "true"
 		&& displayDataStructuresChoice.toString().toLowerCase() != "false")
 	{
-		console.log("displayDataStructuresChoice is not a boolean.\nAborting program...");
-		process.exit(DISPLAY_DATA_STRUCTURES_CHOICE_IS_NOT_BOOLEAN);
+		throw new errors.DisplayDataStructuresChoiceIsNotBooleanError();
 	}
 }
 
@@ -342,29 +341,30 @@ function pickNextWord(
  */
 function abortIfProbabilityIsInvalid(probability)
 {
+	var errorMessage = null;
 	var abort = false;
 
 	if ((typeof probability).toLowerCase() != "number")
 	{
-		console.log("The probabilities array contains a non-number.\nAborting program");
+		errorMessage = "The probabilities array contains a non-number.";
 		abort = true;
 	}
 
 	if (probability < 0)
 	{
-		console.log("The probabilities array contains a probability that is less than 0\nAborting program...");
+		errorMessage = "The probabilities array contains a probability that is less than 0.";
 		abort = true;
 	}
 
 	if (probability > 1)
 	{
-		console.log("The probabilities array contains a probability that is greater than 1\nAborting program...")
+		errorMessage = "The probabilities array contains a probability that is greater than 1.";
 		abort = true;
 	}
 
 	if (abort)
 	{
-		process.exit(INVALID_PROBABILITY);
+		throw new errors.InvalidProbabilityError(errorMessage);
 	}
 }
 
@@ -419,17 +419,17 @@ function makePoem(
 	var previousWord = firstWord;
 	var nextWord = "";
 	for (
-		numOfStanzasToCreate = numOfStanzas;
+		var numOfStanzasToCreate = numOfStanzas;
 		numOfStanzasToCreate > 0;
 		--numOfStanzasToCreate)
 	{
 		for (
-			numOfLinesPerStanzaToCreate = numOfLinesPerStanza;
+			var numOfLinesPerStanzaToCreate = numOfLinesPerStanza;
 			numOfLinesPerStanzaToCreate > 0;
 			--numOfLinesPerStanzaToCreate)
 		{
 			for (
-				numOfWordsPerLineToCreate =
+				var numOfWordsPerLineToCreate =
 				numOfWordsPerLine - inclusionOfFirstWordInThisLine;
 				numOfWordsPerLineToCreate > 0;
 				--numOfWordsPerLineToCreate)
