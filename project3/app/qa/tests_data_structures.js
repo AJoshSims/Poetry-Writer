@@ -1,17 +1,40 @@
 "use strict";
 
-var assert = require("chai").assert;
+const assert = require("assert");
 
 suite("Tests for data_structures.js", function()
 {
-	var dataStructuresFile = require("../data_structures.js");
+	const dataStructuresFile = require("../data_structures");
+	const errors = require("../errors");
 
+	// TODO not done
 	test("readInputFile test", function()
 	{
-		var readInputFile = dataStructuresFile.readInputFile;
+		const readInputFile = dataStructuresFile.readInputFile;
 
-		var inputFileContent = readInputFile("non-existent");
+		var inputFileContent = null;
+		try
+		{
+			inputFileContent = readInputFile("non-existent-file");
+		}
+		catch (error)
+		{
+			assert.deepStrictEqual(
+				error instanceof errors.InputFileDoesNotExistError, false);
+		}
+		try
+		{
+			inputFileContent = readInputFile(3);
+		}
+		catch (error)
+		{
+			assert.deepStrictEqual(
+				error instanceof errors.InputFilePathIsNotStringError, false);
+		}
+	});
 
-		assert.deepEqual(0, 0);
+	test("parseInputFile", function()
+	{
+
 	});
 });

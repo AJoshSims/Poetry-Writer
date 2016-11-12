@@ -48,13 +48,14 @@ const ONE_WORD = 1;
  */
 const NO_WORDS_LEFT_TO_CREATE_FOR_THIS_LINE = 1;
 
+// Program entry point
 try
 {
-// Program entry point
 // Modify this line to specify the arguments which govern the production of
 // the poem.
 	main("rbbrrg_input_text.txt", 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], true);
 }
+
 catch (error)
 {
 	console.log(error.message + "\nAborting program...");
