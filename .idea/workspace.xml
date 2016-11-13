@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f476fd68-c797-4868-bd04-1fb5bee0dd40" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project3/app/make_poem.js" afterPath="$PROJECT_DIR$/project3/app/make_poem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project3/app/qa/tests_data_structures.js" afterPath="$PROJECT_DIR$/project3/app/qa/tests_data_structures.js" />
     </list>
     <ignored path="poetry-writer.iws" />
@@ -25,58 +24,76 @@
     <favorites_list name="poetry-writer" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="make_poem.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project3/app/make_poem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1872">
-              <caret line="56" column="1" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests_make_poem.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_make_poem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_structures.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project3/app/data_structures.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4416">
-              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="errors.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project3/app/errors.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6624">
-              <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests_data_structures.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_data_structures.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="vertical" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="make_poem.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/project3/app/make_poem.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1872">
+                  <caret line="56" column="1" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tests_make_poem.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_make_poem.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="data_structures.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/project3/app/data_structures.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-3792">
+                  <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="errors.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/project3/app/errors.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2928">
+                  <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tests_data_structures.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_data_structures.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="524">
+                  <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="tests_data_structures.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_data_structures.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-344">
+                  <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -470,6 +487,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f476fd68-c797-4868-bd04-1fb5bee0dd40" name="Default" comment="" />
@@ -477,12 +497,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1478895698878</updated>
-      <workItem from="1478895701131" duration="31613000" />
+      <workItem from="1478895701131" duration="34307000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31613000" />
+    <option name="totallyTimeSpent" value="34307000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -502,7 +522,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298466" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298466" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24984127" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.18410042" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" x="1602" y="72" width="1596" height="1626" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -606,14 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_make_poem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project3/app/node_modules/chai/lib/chai.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2256">
@@ -648,17 +660,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project3/app/errors.js">
+    <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_make_poem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6624">
-          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
+        <state relative-caret-position="0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project3/app/data_structures.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4416">
+        <state relative-caret-position="-3792">
           <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding />
         </state>
@@ -666,8 +678,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project3/app/qa/tests_data_structures.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        <state relative-caret-position="524">
+          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project3/app/errors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2928">
+          <caret line="138" column="50" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="50" />
           <folding />
         </state>
       </provider>
