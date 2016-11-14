@@ -1,51 +1,57 @@
 "use strict";
 
 const assert = require("assert");
+const fs = require("fs");
 
-suite("Tests for data_structures.js", function()
+suite("Test suite for data_structures.js", function()
 {
-	const dataStructuresFile = require("../data_structures");
-	const errors = require("../errors");
+	var dataStructuresFile = null;
+	var errors = null;
+	var ygybrgybString = null;
+	var ygybrgybFilePath = null;
+	suiteSetup("Suite setup", function()
+	{
+		dataStructuresFile = require("../data_structures");
+		errors = require("../errors");
+
+		ygybrgybString = "\t\n yellow green yellow\n\nblue   red \tgreen  \t\n\t  yellow blue\n\t ";
+		ygybrgybFilePath = "ygybrgyb.txt";
+		fs.writeFileSync(ygybrgybFilePath, ygybrgybString);
+	});
 
 	test("readInputFile", function()
 	{
-		const readInputFile = dataStructuresFile.readInputFile;
-		var inputFileContent = null;
-
+		var thrown = false;
 		try
 		{
-			inputFileContent = readInputFile(3);
+			dataStructuresFile.readInputFile(3);
 		}
 		catch (error)
 		{
+			thrown = true;
 			assert.deepStrictEqual(
-				error instanceof errors.InputFilePathIsNotStringError, true);
+				error instanceof errors.InputFilePathIsNotStringError,
+				true, "Error is not InputFilePathIsNotStringError.");
 		}
+		assert.deepStrictEqual(thrown, true,
+			"InputFilePathIsNotStringError is not thrown.");
 
-		try
-		{
-			inputFileContent = readInputFile("non-existent-file");
-		}
-		catch (error)
-		{
-			assert.deepStrictEqual(
-				error instanceof errors.InputFileDoesNotExistError, true);
-		}
-
-		inputFileContent = readInputFile("rbbrrg_input_text.txt");
+		var inputFileContent =
+			dataStructuresFile.readInputFile(ygybrgybFilePath);
+		assert.deepStrictEqual(inputFileContent, ygybrgybString,
+			"readInputFile does not return correct string.");
 	});
 
 	test("parseInputFile", function()
 	{
-		const parseInputFile = dataStructuresFile.parseInputFile;
-		var inputFileWords = null;
-
-		inputFileWords = parseInputFile("this is four words");
-		assert.deepStrictEqual(inputFileWords.length === 4, true);
+		var ygybrgybArray = ["yellow", "green", "yellow", "blue", "red",
+			"green", "yellow", "blue"];
+		var inputFileWords = dataStructuresFile.parseInputFile(ygybrgybString);
+		assert.deepStrictEqual(inputFileWords, ygybrgybArray);
 
 		try
 		{
-			inputFileWords = parseInputFile("");
+			dataStructuresFile.parseInputFile("");
 		}
 		catch (error)
 		{
@@ -57,7 +63,7 @@ suite("Tests for data_structures.js", function()
 
 		try
 		{
-			inputFileWords = parseInputFile("    \t       \n    ");
+			dataStructuresFile.parseInputFile("    \t       \n    ");
 		}
 		catch (error)
 		{
@@ -66,5 +72,18 @@ suite("Tests for data_structures.js", function()
 				InputCannotBeEmptyOrOnlyWhitespaceError,
 				true);
 		}
+	});
+
+	test("wordCount", function()
+	{
+		dataStructuresFile.wordCountContainer = {};
+		assert.deepStrictEqual(
+			dataStructuresFile.wordCountContainer, {},
+			"Initial wordCountConainer is not empty.");
+
+		var wordA = "wordA";
+		dataStructuresFile.wordCount(wordA);
+		assert.deepStrictEqual(
+			dataStructuresFile.wordCountContainer[wordA], 1, "freq is wrong");
 	});
 });

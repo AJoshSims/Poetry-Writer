@@ -17,6 +17,10 @@
  * Enables the exportation of this file's functions.
  */
 var exports = module.exports = {};
+exports.wordCountContainer = wordCountContainer;
+exports.condWordCountContainer = condWordCountContainer;
+exports.wordFreqContainer = wordFreqContainer;
+exports.condWordFreqContainer = condWordFreqContainer;
 exports.readInputFile = readInputFile;
 exports.parseInputFile = parseInputFile;
 exports.wordCount = wordCount;
@@ -75,30 +79,9 @@ function readInputFile(inputFilePath)
         throw new errors.InputFilePathIsNotStringError();
     }
 
-    try
-    {
-        // Opens the input file for reading and reads its entirety while
-        // storing its contents, as a string, into inputFileContent.
-        var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
-    }
-
-    catch (error)
-    {
-        switch (error.code)
-        {
-            case "ENOENT":
-                throw new errors.InputFileDoesNotExistError();
-                break;
-            case "EISDIR":
-                throw new errors.InputFilePathPointsToDirectoryError();
-                break;
-            case "EACCES":
-                throw new errors.CannotReadInputFileError();
-                break;
-            case "EMFILE":
-                throw new errors.TooManyOpenFilesError();
-        }
-    }
+    // Opens the input file for reading and reads its entirety while
+    // storing its contents, as a string, into inputFileContent.
+    var inputFileContent = fs.readFileSync(inputFilePath, "utf8");
 
     return inputFileContent;
 }
