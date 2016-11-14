@@ -76,14 +76,29 @@ suite("Test suite for data_structures.js", function()
 
 	test("wordCount", function()
 	{
-		dataStructuresFile.wordCountContainer = {};
+		var wordCountContainerTest = {};
+		var condWordCountContainerTest = {};
+		var condWordFreqContainerTest = {};
+		const testWord = "testWord";
+		var wordCountContainerCorrect = {};
+		wordCountContainerCorrect[testWord] = 1;
+		var condWordCountContainerCorrect = {};
+		condWordCountContainerCorrect[testWord] = {};
+		var condWordFreqContainerCorrect = {};
+		condWordFreqContainerCorrect[testWord] = {};
+		dataStructuresFile.wordCount(
+			testWord,
+			wordCountContainerTest,
+			condWordCountContainerTest,
+			condWordFreqContainerTest);
 		assert.deepStrictEqual(
-			dataStructuresFile.wordCountContainer, {},
-			"Initial wordCountConainer is not empty.");
-
-		var wordA = "wordA";
-		dataStructuresFile.wordCount(wordA);
+			wordCountContainerTest, wordCountContainerCorrect,
+			"wordCountContainer is incorrect for wordCount.");
 		assert.deepStrictEqual(
-			dataStructuresFile.wordCountContainer[wordA], 1, "freq is wrong");
+			condWordCountContainerTest, condWordCountContainerCorrect,
+			"condWordCountContainer is incorrect for wordCount.");
+		assert.deepStrictEqual(
+			condWordFreqContainerTest, condWordFreqContainerCorrect,
+			"condWordFreqContainer is incorrect for wordCount.");
 	});
 });

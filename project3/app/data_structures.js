@@ -119,7 +119,9 @@ function parseInputFile(inputFileContent)
  *
  * @param currentWord - the word currently being examined
  */
-function wordCount(currentWord)
+function wordCount(
+    currentWord,
+    wordCountContainer, condWordCountContainer, condWordFreqContainer)
 {
     // If this word has not been encountered before, establish its existence in
     // the presentation data.
@@ -144,7 +146,7 @@ function wordCount(currentWord)
  * @param previousWord - the word previously examined.
  * @param currentWord - the word currently being examined.
  */
-function condWordCount(previousWord, currentWord)
+function condWordCount(previousWord, currentWord, condWordCountContainer)
 {
     if (previousWord != null)
     {
@@ -172,7 +174,9 @@ function condWordCount(previousWord, currentWord)
  *
  * @return the number of words in the input file
  */
-function calculateWordCounts(inputFileWords)
+function calculateWordCounts(
+    inputFileWords,
+    wordCountContainer, condWordCountContainer, condWordFreqContainer)
 {
     // The first word found in the input file.
     var firstWord = null;
@@ -184,9 +188,13 @@ function calculateWordCounts(inputFileWords)
     inputFileWords.forEach(
         function(currentWord)
         {
-            wordCount(currentWord);
+            wordCount(
+                currentWord,
+                wordCountContainer,
+                condWordCountContainer,
+                condWordFreqContainer);
 
-            condWordCount(previousWord, currentWord);
+            condWordCount(previousWord, currentWord, condWordCountContainer);
 
             previousWord = currentWord;
         }
@@ -199,7 +207,7 @@ function calculateWordCounts(inputFileWords)
     var lastWord = inputFileWords.length - 1;
     var firstWord = 0;
     condWordCount(inputFileWords[lastWord],
-        inputFileWords[firstWord]);
+        inputFileWords[firstWord], condWordCountContainer);
 
     return inputFileWords.length;
 }
@@ -210,7 +218,7 @@ function calculateWordCounts(inputFileWords)
  *
  * @param numOfWords - the number of words in the input file
  */
-function wordFreq(numOfWords)
+function wordFreq(numOfWords, wordCountContainer, wordFreqContainer)
 {
     for (var word in wordCountContainer)
     {
@@ -223,7 +231,7 @@ function wordFreq(numOfWords)
  * directly follows based on the number of its actual appearances after those
  * words.
  */
-function condWordFreq()
+function condWordFreq(condWordCountContainer, condWordFreqContainer)
 {
     var sumOfEveryOccurrenceOfEachWordAfter = 0;
     for (var wordBefore in condWordCountContainer)
@@ -253,11 +261,16 @@ function condWordFreq()
  *
  * @param numOfWords - the number of words in the input file
  */
-function calculateWordFreqs(numOfWords)
+function calculateWordFreqs(
+    numOfWords,
+    wordCountContainer,
+    wordFreqContainer,
+    condWordCountContainer,
+    condWordFreqContainer)
 {
-    wordFreq(numOfWords);
+    wordFreq(numOfWords, wordCountContainer, wordFreqContainer);
 
-    condWordFreq();
+    condWordFreq(condWordCountContainer, condWordFreqContainer);
 }
 
 /**
@@ -277,7 +290,13 @@ function getDataStructures(inputFileName)
 {
     var inputFileWords = parseInputFile(readInputFile(inputFileName));
 
-    calculateWordFreqs(calculateWordCounts(inputFileWords));
+    calculateWordFreqs(
+        calculateWordCounts(inputFileWords,
+        wordCountContainer, condWordCountContainer, condWordFreqContainer),
+        wordCountContainer,
+        wordFreqContainer,
+        condWordCountContainer,
+        condWordFreqContainer);
 
     var dataStructures =
         {"wordCountContainer" : wordCountContainer,
