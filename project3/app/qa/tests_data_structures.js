@@ -49,6 +49,7 @@ suite("Test suite for data_structures.js", function()
 		var inputFileWords = dataStructuresFile.parseInputFile(ygybrgybString);
 		assert.deepStrictEqual(inputFileWords, ygybrgybArray);
 
+		var thrown = false;
 		try
 		{
 			dataStructuresFile.parseInputFile("");
@@ -57,10 +58,15 @@ suite("Test suite for data_structures.js", function()
 		{
 			assert.deepStrictEqual(
 				error instanceof errors.
-				InputCannotBeEmptyOrOnlyWhitespaceError,
-				true);
+				InputCannotBeEmptyOrOnlyWhitespaceError, true,
+				"InputCannotBeEmptyOrOnlyWhitespaceError incorrect for parseInputFile");
+			thrown = true;
 		}
+		assert.deepStrictEqual(
+			thrown, true,
+			"InputCannotBeEmptyOrOnlyWhitespaceError incorrect for parseInputFile");
 
+		thrown = false;
 		try
 		{
 			dataStructuresFile.parseInputFile("    \t       \n    ");
@@ -69,9 +75,13 @@ suite("Test suite for data_structures.js", function()
 		{
 			assert.deepStrictEqual(
 				error instanceof errors.
-				InputCannotBeEmptyOrOnlyWhitespaceError,
-				true);
+				InputCannotBeEmptyOrOnlyWhitespaceError, true,
+				"InputCannotBeEmptyOrOnlyWhitespaceError incorrect for parseInputFile");
+			thrown = true;
 		}
+		assert.deepStrictEqual(
+			thrown, true,
+			"InputCannotBeEmptyOrOnlyWhitespaceError incorrect for parseInputFile");
 	});
 
 	test("wordCount", function()
