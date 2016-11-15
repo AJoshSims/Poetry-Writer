@@ -487,7 +487,7 @@ function makePoem(
  * @param probabilitiesForWordToBeWritten - the array containing the
  *     supposedly random probabilities which govern which words constitute the
  *     poem which is produced
- * @param displayDataStructuresChoice - represents the
+ * @param displayDataStructures - represents the
  *     choice to display the wordCount, wordFreq, condWordCount, and
  *     condWordFreq data structures
  */
@@ -495,14 +495,14 @@ function main(
 	inputFilePath,
 	numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine,
 	probabilitiesForWordToBeWritten,
-	displayDataStructuresChoice)
+	displayDataStructures)
 {
 	var dataStructures = dataStructuresFile.getDataStructures(inputFilePath);
 
 	abortIfArgsAreUnacceptable(
 		numOfStanzas, numOfLinesPerStanza, numOfWordsPerLine,
 		probabilitiesForWordToBeWritten,
-		displayDataStructuresChoice, dataStructures);
+		displayDataStructures, dataStructures);
 
 	var wordFreqContainer = sortWordFreqContainer(
 		dataStructures["wordFreqContainer"]);
@@ -516,8 +516,9 @@ function main(
 
 	process.stdout.write(poem);
 
-	if (displayDataStructuresChoice)
+	if (displayDataStructures)
 	{
-		dataStructuresFile.displayDataStructures(dataStructures);
+		console.log(
+			dataStructuresFile.getDataStructuresString(dataStructures));
 	}
 }

@@ -30,7 +30,7 @@ exports.wordFreq = wordFreq;
 exports.condWordFreq = condWordFreq;
 exports.calculateWordFreqs = calculateWordFreqs;
 exports.getDataStructures = getDataStructures;
-exports.displayDataStructures = displayDataStructures;
+exports.getDataStructuresString = getDataStructuresString;
 
 var errors = require("./errors");
 
@@ -239,7 +239,7 @@ function condWordFreq(condWordCountContainer, condWordFreqContainer)
         for (var wordAfter in condWordCountContainer[wordBefore])
         {
             sumOfEveryOccurrenceOfEachWordAfter +=
-                condWordCountContainer[wordBefore][wordAfter]
+                condWordCountContainer[wordBefore][wordAfter];
         }
 
         for (var wordAfter in condWordCountContainer[wordBefore])
@@ -279,16 +279,16 @@ function calculateWordFreqs(
  * well as the occurrences and likelihood of each word which appears directly
  * after that word, are returned via an array of data structures.
  *
- * @param inputFileName - the name of the file to be parsed
+ * @param inputFilePath - the path of the file to be parsed
  *
  * @return dataStructures - objects containing information regarding the number
  *     of occurrences of each word in the input file and the likelihood of each
  *     word's occurrence, as well as the occurrences and likelihood of each
  *     word which appears directly after
  */
-function getDataStructures(inputFileName)
+function getDataStructures(inputFilePath)
 {
-    var inputFileWords = parseInputFile(readInputFile(inputFileName));
+    var inputFileWords = parseInputFile(readInputFile(inputFilePath));
 
     calculateWordFreqs(
         calculateWordCounts(inputFileWords,
@@ -317,14 +317,17 @@ function getDataStructures(inputFileName)
  *     word's occurrence, as well as the occurrences and likelihood of each
  *     word which appears directly after
  */
-function displayDataStructures(dataStructures)
+function getDataStructuresString(dataStructures)
 {
-    console.log("wordCount is " +
-        JSON.stringify(dataStructures["wordCountContainer"], null, "  "));
-    console.log("wordFreq is " +
-        JSON.stringify(dataStructures["wordFreqContainer"], null, "  "));
-    console.log("condWordCount is " +
-        JSON.stringify(dataStructures["condWordCountContainer"], null, "  "));
-    console.log("condWordFreq is " +
-        JSON.stringify(dataStructures["condWordFreqContainer"], null, "  "));
+    var dataStructuresString =
+        "wordCount is " +
+        JSON.stringify(dataStructures["wordCountContainer"], null, "  ") +
+        "\nwordFreq is " +
+        JSON.stringify(dataStructures["wordFreqContainer"], null, "  ") +
+        "\ncondWordCount is " +
+        JSON.stringify(dataStructures["condWordCountContainer"], null, "  ") +
+        "\ncondWordFreq is " +
+        JSON.stringify(dataStructures["condWordFreqContainer"], null, "  ");
+
+    return dataStructuresString;
 }
