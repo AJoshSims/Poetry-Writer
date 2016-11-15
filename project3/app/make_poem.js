@@ -18,11 +18,23 @@
  */
 var exports = module.exports = {};
 
-// TODO export as functions
-exports.main = main;
-exports.makePoem = makePoem;
+exports.abortIfNotIntegers =
+	abortIfNotIntegers;
+exports.abortIfProbabilitiesArrayIsInvalid =
+	abortIfProbabilitiesArrayIsInvalid;
+exports.abortIfProbabilitiesArrayLengthNotEqualsNumOfPoemWords =
+	abortIfProbabilitiesArrayLengthNotEqualsNumOfPoemWords;
+exports.abortIfdisplayDataStructuresChoiceNotBoolean =
+	abortIfdisplayDataStructuresChoiceNotBoolean;
+exports.abortIfArgsAreUnacceptable =
+	abortIfArgsAreUnacceptable;
+exports.sortWordFreqContainer = sortWordFreqContainer;
+exports.sortCondWordFreqContainer = sortCondWordFreqContainer;
 exports.pickFirstWord = pickFirstWord;
 exports.pickNextWord = pickNextWord;
+exports.abortIfProbabilityIsInvalid = abortIfProbabilityIsInvalid;
+exports.makePoem = makePoem;
+exports.main = main;
 
 var errors = require("./errors");
 

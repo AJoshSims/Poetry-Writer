@@ -2,7 +2,7 @@
 
 suite("Test suite for make_poem.js", function()
 {
-	var dataStructuresFile = null;
+	var makePoemFile = null;
 	var errors = null;
 	var ygybrgybString = null;
 	var ygybrgybFilePath = null;
@@ -18,9 +18,56 @@ suite("Test suite for make_poem.js", function()
 
 	test("abortIfNotIntegers", function()
 	{
+		var thrown = false;
 		try
 		{
-
+			makePoemFile.abortIfNotIntegers("notInt", 2, 3);
 		}
+		catch (error)
+		{
+			assert.deepStrictEqual(
+				error instanceof errors.
+				StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError,
+				true,
+				"StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError is incorrect for abortIfNotIntegers.");
+			thrown = true;
+		}
+		assert.deepStrictEqual(
+			thrown, true,
+			"StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError is incorrect for abortIfNotIntegers.");
+		thrown = false;
+		try
+		{
+			makePoemFile.abortIfNotIntegers(1, "notInt", 3);
+		}
+		catch (error)
+		{
+			assert.deepStrictEqual(
+				error instanceof errors.
+					StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError,
+				true,
+				"StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError is incorrect for abortIfNotIntegers.");
+			thrown = true;
+		}
+		assert.deepStrictEqual(
+			thrown, true,
+			"StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError is incorrect for abortIfNotIntegers.");
+		thrown = false;
+		try
+		{
+			makePoemFile.abortIfNotIntegers(1, 2, "notInt");
+		}
+		catch (error)
+		{
+			assert.deepStrictEqual(
+				error instanceof errors.
+					StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError,
+				true,
+				"StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError is incorrect for abortIfNotIntegers.");
+			thrown = true;
+		}
+		assert.deepStrictEqual(
+			thrown, true,
+			"StanzasOrLinesPerStanzaOrWordsPerLineIsNotIntegerError is incorrect for abortIfNotIntegers.");
 	});
 });
