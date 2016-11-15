@@ -63,9 +63,9 @@ const NO_WORDS_LEFT_TO_CREATE_FOR_THIS_LINE = 1;
 // Program entry point
 try
 {
-// Modify this line to specify the arguments which govern the production of
-// the poem.
-	main("rbbrrg_input_text.txt", 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], true);
+	// Uncomment this line to run the program. Modify this line to specify the
+	// arguments which govern the production of the poem.
+	// main("rbbrrg_input_text.txt", 1, 2, 3, [0.6, 0.2, 0.8, 0.9, 0.4, 0.4], true);
 }
 
 catch (error)
@@ -530,7 +530,10 @@ function main(
 
 	if (displayDataStructures)
 	{
-		console.log(
-			dataStructuresFile.getDataStructuresString(dataStructures));
+		var dataStructuresString =
+			dataStructuresFile.getDataStructuresString(dataStructures);
+		console.log(dataStructuresString);
 	}
+
+	return poem;
 }

@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Test suite for data_structures.js
+ *
+ * @author Joshua Sims
+ * @version 10 November 2016
+ */
+
 const assert = require("assert");
 const fs = require("fs");
 

@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Errors for the Poetry Writer program.
+ *
+ * @author Joshua Sims
+ * @version 10 November 2016
+ */
+
 // Imports and exports
 var exports = module.exports = {};
 exports.InputFilePathIsNotStringError =
